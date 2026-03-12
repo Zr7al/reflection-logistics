@@ -1,6 +1,6 @@
 /**
  * REFLECTION LOGISTICS — main.js
- * Fixed build — all class mismatches resolved, globals retained for inline handlers
+ * Enhanced build — sanitized, secure, and logically audited.
  */
 
 (() => {
@@ -185,9 +185,13 @@ NAVIGATION
 const initNav = () => {
   const hamburger = document.getElementById('hamburger')
   const navLinks  = document.getElementById('navLinks')
+  const overlay   = document.getElementById('nav-overlay')
   if (!hamburger || !navLinks) return
 
   const toggle = open => {
+    const isOpen = navLinks.classList.contains('open')
+    if (open === isOpen) return
+
     navLinks.classList.toggle('open', open)
     hamburger.classList.toggle('open', open)
     overlay?.classList.toggle('visible', open)
@@ -196,32 +200,39 @@ const initNav = () => {
     hamburger.setAttribute('aria-expanded', String(open))
   }
 
-  const overlay = document.getElementById('nav-overlay')
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation()
+    toggle(!navLinks.classList.contains('open'))
+  })
+  
   if (overlay) overlay.addEventListener('click', () => toggle(false))
 
-  hamburger.addEventListener('click', () => toggle(!navLinks.classList.contains('open')))
   navLinks.querySelectorAll('a').forEach((a, i) => {
     a.style.setProperty('--nav-item-delay', `${i * 0.04}s`)
     a.addEventListener('click', () => toggle(false))
   })
-  overlay?.addEventListener('click', () => toggle(false))
+
   document.addEventListener('click', e => {
     if (navLinks.classList.contains('open')
       && !navLinks.contains(e.target)
       && !hamburger.contains(e.target)) toggle(false)
   })
 
-  // Active link — match by filename; project-detail counts as projects
-  const page = location.pathname.split('/').pop() || 'index.html'
-  const pageBase = page.split('?')[0]
+  // Active link — improved matching for subdirectories and query params
+  const currentPath = location.pathname.split('/').pop() || 'index.html'
+  const currentBase = currentPath.toLowerCase()
+
   document.querySelectorAll('.nav-links a').forEach(a => {
     const href = a.getAttribute('href')
     if (!href) return
-    const linkPage = href.split('?')[0]
-    if (linkPage === pageBase) a.classList.add('active')
-    else if (pageBase === 'project-detail.html' && linkPage === 'projects.html') a.classList.add('active')
+    const linkBase = href.split('/').pop().split('?')[0].toLowerCase()
+    
+    if (linkBase === currentBase) {
+      a.classList.add('active')
+    } else if (currentBase === 'project-detail.html' && linkBase === 'projects.html') {
+      a.classList.add('active')
+    }
   })
-
 }
 
 const initNavScrollState = () => {
@@ -268,10 +279,6 @@ const initContactForm = () => {
   const form = document.getElementById('contactForm')
   if (!form) return
 
-  // Remove any duplicate inline submit handlers that conflict
-  // (contact.html has an inline <script> with its own submit listener)
-  // We let main.js be the single source of truth.
-
   const successEl = document.getElementById('formSuccess')
   const errorEl   = document.getElementById('formError')
 
@@ -294,7 +301,6 @@ const initContactForm = () => {
       if (!isAcct && dateTo)   dateTo.value   = ''
     }
     serviceSelect.addEventListener('change', () => setAccountingState(serviceSelect.value === 'accounting'))
-    // Apply initial state on load
     setAccountingState(serviceSelect.value === 'accounting')
   }
 
@@ -309,15 +315,14 @@ const initContactForm = () => {
   form.addEventListener('submit', async e => {
     e.preventDefault()
 
-    // Honeypot
     const honey = document.getElementById('honeypot')
     if (honey && honey.value) return
 
-    // Validate all required fields
     let firstInvalid = null
     form.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
       if (!validateField(field) && !firstInvalid) firstInvalid = field
     })
+    
     if (firstInvalid) {
       firstInvalid.focus()
       if (errorEl) {
@@ -331,7 +336,8 @@ const initContactForm = () => {
 
     const btn   = form.querySelector('.submit-btn')
     const label = btn && btn.querySelector('[data-i18n]')
-    const orig  = label ? label.textContent : (btn ? btn.textContent : '')
+    const orig  = label ? label.textContent : (btn ? btn.textContent : 'Send Message')
+    
     if (btn) btn.disabled = true
     if (label) label.textContent = 'Sending…'
 
@@ -347,16 +353,12 @@ const initContactForm = () => {
         }
         showToast('Message sent! We\'ll be in touch within 24 hours.', 'success', 5000)
       } else {
-        const msg = data.message || 'Something went wrong. Please try again.'
-        if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible') }
-        if (label) label.textContent = orig
-        if (btn) btn.disabled = false
-        showToast(msg, 'error')
+        throw new Error(data.message || 'Server error')
       }
     } catch (err) {
-      const msg = err.name === 'AbortError'
-        ? 'Request timed out. Check your connection.'
-        : 'Network error. Please try again.'
+      const msg = err.message === 'Server error' ? 'Something went wrong. Please try again.' : 
+                 (err.name === 'AbortError' ? 'Request timed out. Check your connection.' : 'Network error. Please try again.')
+      
       if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible') }
       if (label) label.textContent = orig
       if (btn) btn.disabled = false
@@ -372,7 +374,6 @@ FIELD VALIDATION
 
 const validateField = field => {
   if (!field.willValidate) return true
-  // Skip hidden accounting fields
   const acct = field.closest('#accountingFields')
   if (acct && !acct.classList.contains('visible')) return true
 
@@ -407,33 +408,56 @@ const validateField = field => {
 
 
 /* ─────────────────────────────
-CV DRAG DROP (zone in modal)
+CV VALIDATION & DRAG DROP
 ───────────────────────────── */
+
+const validateCVFile = (file) => {
+  if (!file) return { valid: false };
+  if (file.size > 5 * 1024 * 1024) return { valid: false, message: 'File too large — max 5MB' };
+
+  const allowedMimes = [
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  ];
+  const isAllowedMime = allowedMimes.includes(file.type);
+  const isAllowedExt  = /\.(pdf|doc|docx)$/i.test(file.name);
+
+  if (!isAllowedMime && !isAllowedExt) {
+    return { valid: false, message: 'Only PDF or Word documents accepted' };
+  }
+  return { valid: true };
+};
+
+const updateCVUploadUI = (file) => {
+  const zone   = document.getElementById('cvZone');
+  const nameEl = document.getElementById('cvFilename');
+  const input  = document.getElementById('cvFile');
+
+  if (!file) {
+    zone?.classList.remove('has-file');
+    if (nameEl) nameEl.textContent = '';
+    return;
+  }
+
+  const result = validateCVFile(file);
+  if (!result.valid) {
+    showToast(result.message, 'error');
+    if (input) input.value = '';
+    zone?.classList.remove('has-file');
+    if (nameEl) nameEl.textContent = '';
+    return false;
+  }
+
+  zone?.classList.add('has-file');
+  if (nameEl) nameEl.textContent = '✓ ' + file.name;
+  return true;
+};
 
 const initCVUpload = () => {
   const zone   = document.getElementById('cvZone')
   const input  = document.getElementById('cvFile')
-  const nameEl = document.getElementById('cvFilename')
-
   if (!zone || !input) return
-
-  const handleFile = file => {
-    if (!file) return
-    if (file.size > 5 * 1024 * 1024) {
-      showToast('File too large — max 5MB', 'error')
-      input.value = ''
-      return
-    }
-    const allowed = ['application/pdf','application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
-    if (!allowed.includes(file.type) && !file.name.match(/\.(pdf|doc|docx)$/i)) {
-      showToast('Only PDF or Word documents accepted', 'error')
-      input.value = ''
-      return
-    }
-    zone.classList.add('has-file')
-    if (nameEl) nameEl.textContent = '✓ ' + file.name
-  }
 
   zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over') })
   zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'))
@@ -442,35 +466,38 @@ const initCVUpload = () => {
     zone.classList.remove('drag-over')
     const file = e.dataTransfer.files[0]
     if (file) {
-      try {
-        const dt = new DataTransfer()
-        dt.items.add(file)
-        input.files = dt.files
-      } catch (_) {}
-      handleFile(file)
+      const result = validateCVFile(file);
+      if (result.valid) {
+        try {
+          const dt = new DataTransfer()
+          dt.items.add(file)
+          input.files = dt.files
+          updateCVUploadUI(file);
+        } catch (_) {
+          handleFileSelect(input);
+        }
+      } else {
+        showToast(result.message, 'error');
+      }
     }
   })
 
-  input.addEventListener('change', () => handleFile(input.files[0]))
+  input.addEventListener('change', () => updateCVUploadUI(input.files[0]))
 }
 
 
 /* ─────────────────────────────
 JOB DRAWER
-BUG FIX: CSS uses .active on .job-item — was using .open which broke drawers
 ───────────────────────────── */
 
 window.toggleJob = row => {
   const item   = row.closest('.job-item')
   if (!item) return
-  const drawer = item.querySelector('.job-drawer')
   const isOpen = item.classList.contains('active')
 
-  // Close all open items
   document.querySelectorAll('.job-item.active').forEach(j => {
     j.classList.remove('active')
-    const r = j.querySelector('.job-row')
-    if (r) r.setAttribute('aria-expanded', 'false')
+    j.querySelector('.job-row')?.setAttribute('aria-expanded', 'false')
   })
 
   if (!isOpen) {
@@ -482,7 +509,6 @@ window.toggleJob = row => {
 
 /* ─────────────────────────────
 APPLY MODAL
-BUG FIX: CSS uses .visible on .modal-overlay — was using .open which kept modal hidden
 ───────────────────────────── */
 
 let _currentJob = ''
@@ -494,15 +520,15 @@ window.openApplyModal = title => {
   const titleEl = document.getElementById('modalJobTitle')
   if (titleEl) titleEl.textContent = 'Position: ' + title
 
-  // Reset modal state
   const form    = document.getElementById('modalForm')
   const success = document.getElementById('modalSuccess')
   const errEl   = document.getElementById('modalError')
   if (form)    { form.style.display = ''; form.reset() }
   if (success) { success.hidden = true }
   if (errEl)   { errEl.classList.remove('visible') }
+  
+  updateCVUploadUI(null);
 
-  // BUG FIX: was .open — CSS expects .visible
   modal.classList.add('visible')
   modal.setAttribute('aria-hidden', 'false')
   document.body.style.overflow = 'hidden'
@@ -512,49 +538,23 @@ window.openApplyModal = title => {
 window.closeApplyModal = () => {
   const modal = document.getElementById('applyModal')
   if (!modal) return
-  // BUG FIX: was .open — CSS expects .visible
   modal.classList.remove('visible')
   modal.setAttribute('aria-hidden', 'true')
   document.body.style.overflow = ''
   _currentJob = ''
 }
 
-// Close on overlay click
 document.addEventListener('click', e => {
   const modal = document.getElementById('applyModal')
-  if (modal && e.target === modal) window.closeApplyModal()
+  if (e.target === modal) window.closeApplyModal()
 })
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') window.closeApplyModal()
 })
 
-
-/* ─────────────────────────────
-FILE SELECT (inline onchange handler in careers.html)
-───────────────────────────── */
-
 window.handleFileSelect = input => {
-  const file   = input.files[0]
-  const nameEl = document.getElementById('cvFilename')
-  const zone   = document.getElementById('cvZone')
-
-  if (!file) return
-
-  if (file.size > 5 * 1024 * 1024) {
-    showToast('File too large — max 5MB', 'error')
-    input.value = ''
-    return
-  }
-
-  if (zone)   zone.classList.add('has-file')
-  if (nameEl) nameEl.textContent = '✓ ' + file.name
+  updateCVUploadUI(input?.files[0]);
 }
-
-
-/* ─────────────────────────────
-SUBMIT APPLICATION (modal form)
-BUG FIX: was just hiding form with no validation — now validates + async fetch
-───────────────────────────── */
 
 window.submitApplication = async e => {
   if (e) e.preventDefault()
@@ -566,23 +566,28 @@ window.submitApplication = async e => {
   const cvFile  = document.getElementById('cvFile')
   const honey   = document.getElementById('modalHoneypot')
 
-  // Honeypot
   if (honey && honey.value) return
 
-  // Basic validation
-  if (!nameEl || !nameEl.value.trim()) {
+  if (!nameEl?.value.trim()) {
     showToast('Please enter your full name.', 'error')
-    nameEl && nameEl.focus()
+    nameEl?.focus()
     return
   }
-  if (!emailEl || !emailEl.value.trim() || !emailEl.value.includes('@')) {
+  if (!emailEl?.value.trim() || !emailEl.value.includes('@')) {
     showToast('Please enter a valid email address.', 'error')
-    emailEl && emailEl.focus()
+    emailEl?.focus()
     return
   }
-  if (!cvFile || !cvFile.files.length) {
+  
+  if (!cvFile?.files.length) {
     showToast('Please attach your CV before submitting.', 'error')
     return
+  }
+  
+  const cvValidation = validateCVFile(cvFile.files[0]);
+  if (!cvValidation.valid) {
+    showToast(cvValidation.message || 'Invalid CV file.', 'error');
+    return;
   }
 
   if (errEl) errEl.classList.remove('visible')
@@ -594,9 +599,8 @@ window.submitApplication = async e => {
   fd.append('position',        _currentJob)
   fd.append('cv',              cvFile.files[0])
 
-  // Also append phone if present
   const phoneEl = document.getElementById('applicantPhone')
-  if (phoneEl && phoneEl.value) fd.append('applicant_phone', phoneEl.value)
+  if (phoneEl?.value) fd.append('applicant_phone', phoneEl.value)
 
   try {
     const res  = await fetchWithTimeout('send_cv.php', { method: 'POST', body: fd })
@@ -609,15 +613,11 @@ window.submitApplication = async e => {
       if (success) success.hidden = false
       showToast('Application sent! We will be in touch.', 'success', 5000)
     } else {
-      const msg = data.message || 'Something went wrong. Please try again.'
-      if (errEl) { errEl.textContent = msg; errEl.classList.add('visible') }
-      if (btn)   { btn.disabled = false; btn.textContent = 'Submit Application' }
-      showToast(msg, 'error')
+      throw new Error(data.message || 'Server error')
     }
   } catch (err) {
-    const msg = err.name === 'AbortError'
-      ? 'Request timed out. Check your connection.'
-      : 'Network error. Please try again.'
+    const msg = err.message === 'Server error' ? 'Something went wrong. Please try again.' : 
+               (err.name === 'AbortError' ? 'Request timed out. Check your connection.' : 'Network error. Please try again.')
     if (errEl) { errEl.textContent = msg; errEl.classList.add('visible') }
     if (btn)   { btn.disabled = false; btn.textContent = 'Submit Application' }
     showToast(msg, 'error')
@@ -685,6 +685,7 @@ const initPageTransitions = () => {
     const href = a.getAttribute('href')
     if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return
     if (a.target === '_blank' || a.hasAttribute('download')) return
+    
     try {
       const url = new URL(href, location.origin)
       if (url.origin !== location.origin || url.pathname === location.pathname) return
@@ -692,6 +693,7 @@ const initPageTransitions = () => {
 
     e.preventDefault()
     document.body.classList.add('page-exiting')
+    // Wait for 220ms to match CSS opacity transition
     setTimeout(() => { location.href = href }, 220)
   })
 }
@@ -702,7 +704,6 @@ INIT
 ───────────────────────────── */
 
 document.addEventListener('componentsLoaded', () => {
-  // Critical, lightweight initializers first (nav/footer loaded by components.js)
   initToasts()
   initImageLoading()
   initNav()
@@ -719,7 +720,9 @@ document.addEventListener('componentsLoaded', () => {
       initPageTransitions()
       initParallax()
       initNavScrollState()
-    } catch (_) { /* fail-soft for older browsers */ }
+    } catch (e) {
+      console.warn('Non-critical init failed:', e)
+    }
   }
 
   if ('requestIdleCallback' in window) {
@@ -727,20 +730,13 @@ document.addEventListener('componentsLoaded', () => {
   } else {
     setTimeout(runNonCritical, 0)
   }
-
 })
 
 })()
 
-// Ensure service sliders are initialized even if `componentsLoaded` fires early
-document.addEventListener('DOMContentLoaded', () => {
-  try { initServiceSliders() } catch (_) {}
-})
-
-window.addEventListener('load', () => {
-  try { initServiceSliders() } catch (_) {}
-})
-
+/**
+ * Service Slider logic — kept outside IIFE for easy call/reload
+ */
 function ensureSliderImageLoaded(slide) {
   if (!slide || slide._loaded) return;
   const img = slide.querySelector('img[data-src]');
@@ -795,37 +791,24 @@ function initServiceSliders() {
     const next = slider.querySelector('.s-next');
     const dots = slider.querySelectorAll('.dot');
 
-    prev && prev.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-  
-      goToServiceSlide(
-          slider,
-          currentServiceSlideIndex(slider) - 1
-      );
-  });
+    prev?.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
+    });
 
-  next && next.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    goToServiceSlide(
-        slider,
-        currentServiceSlideIndex(slider) + 1
-    );
-});
+    next?.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
+    });
 
     dots.forEach(dot => {
       dot.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-  
+          e.preventDefault(); e.stopPropagation();
           const idx = parseInt(dot.dataset.dotIndex || "0", 10);
           goToServiceSlide(slider, idx);
       });
-  });
+    });
 
-    // Keyboard navigation for accessibility
     slider.setAttribute('tabindex', '0');
     slider.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') {

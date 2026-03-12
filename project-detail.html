@@ -204,79 +204,79 @@ const PROJECTS = {
   1: {
     title: 'AQABA\n—\nROTTERDAM',
     titleDisplay: 'AQABA<br><em>—</em><br>ROTTERDAM',
-    badge: 'Sea Freight',
+    badge: 'Sea Freight', badgeKey: 'svc_sea',
     img: 'assets/images/sea.webp',
     lead: 'Full container load movement of industrial equipment from the Port of Aqaba to Rotterdam. Three 40ft HC containers across multiple vessels, with end-to-end port operations management and full customs brokerage on both ends.',
     overview: 'The client required movement of heavy industrial machinery destined for a manufacturing facility in the Netherlands. The cargo required specialized container configuration, hazardous goods documentation, and coordination with multiple port authorities across the route.',
     challenge: 'Coordinating hazardous goods classification across 3 port authorities with different documentation standards while meeting a fixed unloading window in Rotterdam that couldn\'t be moved.',
     solution: 'Pre-cleared all hazmat paperwork 10 days ahead. Negotiated transshipment slot at Port Said to align with the Rotterdam window. Dedicated ops contact on-ground at Aqaba for day-of loading supervision.',
     stats: [{ val:'28<span>D</span>', label:'Transit Time' }, { val:'0<span>%</span>', label:'Damage Rate' }, { val:'3<span>x</span>', label:'Containers' }],
-    service: 'Sea Freight', origin: 'Port of Aqaba, Jordan', dest: 'Port of Rotterdam, Netherlands',
+    service: 'Sea Freight', serviceKey: 'svc_sea', origin: 'Port of Aqaba, Jordan', dest: 'Port of Rotterdam, Netherlands',
     cargo: 'Industrial Equipment', weight: '68,400 kg', timeline: '28 Days', industry: 'Manufacturing'
   },
   2: {
     title: 'AMMAN\n—\nDUBAI',
     titleDisplay: 'AMMAN<br><em>—</em><br>DUBAI',
-    badge: 'Air Freight',
+    badge: 'Air Freight', badgeKey: 'svc_air',
     img: 'assets/images/air.webp',
     lead: 'Urgent pharmaceutical cold-chain air shipment from Queen Alia International Airport to Dubai DXB. Temperature-controlled cargo requiring continuous 2–8°C throughout the entire journey.',
     overview: 'A pharmaceutical distributor required urgent movement of temperature-sensitive medication. Zero tolerance for cold chain breaks — any deviation would result in full cargo loss. Our team coordinated with the airline\'s special cargo division and arranged ground handling at both airports.',
     challenge: 'Maintaining 2–8°C cold chain without interruption across two airports, ground handling transfer, and a 2-hour layover, with documentation required in both Arabic and English.',
     solution: 'Booked dedicated cold-room ground handling at both AMM and DXB. Positioned our agent at DXB for real-time monitoring. Completed dual-language documentation 48 hours before departure.',
     stats: [{ val:'48<span>H</span>', label:'Total Transit' }, { val:'2<span>–8°C</span>', label:'Maintained' }, { val:'0<span>%</span>', label:'Chain Breaks' }],
-    service: 'Air Freight', origin: 'Queen Alia Intl, Amman', dest: 'DXB, Dubai UAE',
+    service: 'Air Freight', serviceKey: 'svc_air', origin: 'Queen Alia Intl, Amman', dest: 'DXB, Dubai UAE',
     cargo: 'Pharmaceuticals (Cold Chain)', weight: '1,240 kg', timeline: '48 Hours', industry: 'Healthcare'
   },
   3: {
     title: 'AMMAN\n—\nRIYADH',
     titleDisplay: 'AMMAN<br><em>—</em><br>RIYADH',
-    badge: 'Land Freight',
+    badge: 'Land Freight', badgeKey: 'svc_land',
     img: 'assets/images/land.webp',
     lead: 'Recurring FTL contract for FMCG distribution to Saudi Arabia. 12 trucks dispatched monthly across the Amman–Riyadh corridor, with dedicated fleet management and fully managed customs at every border crossing.',
     overview: 'A major FMCG importer needed a reliable, recurring land freight solution into the Saudi market. Consistency and customs efficiency were the top priorities — any delays at the border directly impacted store shelf availability.',
     challenge: 'Maintaining zero border delays across 12 monthly FTL movements with variable cargo manifests and Saudi customs pre-clearance requirements that changed quarterly.',
     solution: 'Assigned a dedicated border coordinator who monitors all 12 trucks per cycle. Pre-filed all Saudi customs declarations 48 hours before each crossing. Built a recurring documentation template with the client.',
     stats: [{ val:'12<span>x</span>', label:'Monthly Trucks' }, { val:'99<span>%</span>', label:'On-Time Rate' }, { val:'0<span>D</span>', label:'Avg Border Delay' }],
-    service: 'Land Freight', origin: 'Amman, Jordan', dest: 'Riyadh, Saudi Arabia',
+    service: 'Land Freight', serviceKey: 'svc_land', origin: 'Amman, Jordan', dest: 'Riyadh, Saudi Arabia',
     cargo: 'FMCG Goods', weight: 'Avg 22,000 kg/truck', timeline: 'Ongoing Contract', industry: 'Retail / FMCG'
   },
   4: {
     title: 'FRANKFURT\n—\nAMMAN',
     titleDisplay: 'FRANKFURT<br><em>—</em><br>AMMAN',
-    badge: 'Air Freight',
+    badge: 'Air Freight', badgeKey: 'svc_air',
     img: 'assets/images/air.webp',
     lead: '6-ton heavy machinery import from Frankfurt for a construction group. Cleared Jordanian customs and delivered on-site within 72 hours of the aircraft touching down at Queen Alia International.',
     overview: 'A construction company won a project requiring specialized equipment from a German manufacturer. The equipment had to arrive on a specific date to align with a site mobilization schedule — no flexibility.',
     challenge: 'Pre-clearance of heavy, non-standard machinery through Jordanian customs within a single working day, while arranging heavy-lift ground transport from the airport to the project site.',
     solution: 'Submitted all customs paperwork and Ministry of Industry permits 5 days pre-arrival. Arranged a 12-ton flatbed with crane service standing by at the airport. Cleared and delivered within the 72-hour commitment.',
     stats: [{ val:'72<span>H</span>', label:'Clear & Deliver' }, { val:'6<span>T</span>', label:'Cargo Weight' }, { val:'1<span>D</span>', label:'Customs Clearance' }],
-    service: 'Air Freight', origin: 'Frankfurt Airport, Germany', dest: 'Queen Alia Intl, Amman',
+    service: 'Air Freight', serviceKey: 'svc_air', origin: 'Frankfurt Airport, Germany', dest: 'Queen Alia Intl, Amman',
     cargo: 'Heavy Machinery', weight: '6,000 kg', timeline: '72 Hours', industry: 'Construction'
   },
   5: {
     title: 'SHANGHAI\n—\nAQABA',
     titleDisplay: 'SHANGHAI<br><em>—</em><br>AQABA',
-    badge: 'Sea Freight',
+    badge: 'Sea Freight', badgeKey: 'svc_sea',
     img: 'assets/images/sea.webp',
     lead: 'LCL sea freight consolidation for a retail importer. Multiple SKUs from different Chinese suppliers consolidated at origin, transshipped through Jebel Ali, and delivered to the client\'s Amman warehouse in 38 days.',
     overview: 'A growing retail business needed to import goods from several factories across China without paying for full container loads. LCL consolidation was the right answer — we coordinated pickup from 4 different factory locations and consolidated into a single shipment.',
     challenge: 'Aligning pickup schedules across 4 Chinese suppliers, consolidating at origin warehouse within a 3-day window to make the weekly vessel departure, while managing split HS codes for Jordanian customs.',
     solution: 'Deployed our China-based partner agent to coordinate factory pickups. Consolidated successfully within 2 days. Handled all Jordanian customs pre-clearance including split-HS documentation for the mixed cargo.',
     stats: [{ val:'38<span>D</span>', label:'Total Transit' }, { val:'4<span>x</span>', label:'Suppliers' }, { val:'1<span>x</span>', label:'Shipment' }],
-    service: 'Sea Freight', origin: 'Shanghai, China', dest: 'Port of Aqaba + Amman WH',
+    service: 'Sea Freight', serviceKey: 'svc_sea', origin: 'Shanghai, China', dest: 'Port of Aqaba + Amman WH',
     cargo: 'Retail Consumer Goods', weight: '14,600 kg', timeline: '38 Days', industry: 'Retail'
   },
   6: {
     title: 'AMMAN\n—\nABU DHABI',
     titleDisplay: 'AMMAN<br><em>—</em><br>ABU DHABI',
-    badge: 'Land Freight',
+    badge: 'Land Freight', badgeKey: 'svc_land',
     img: 'assets/images/land.webp',
     lead: 'Oversize project cargo movement for an energy sector client. Custom-engineered transport plan across 3 countries with pilot vehicle escorts, multi-country permits, and zero-incident delivery.',
     overview: 'An energy company needed to move oversized turbine components from a facility in Amman to an installation site in Abu Dhabi. The cargo exceeded standard road dimensions and required permits from 3 separate transport authorities.',
     challenge: 'Obtaining permits from Jordan, Saudi Arabia, and UAE simultaneously while coordinating escort vehicles across 3 different law enforcement jurisdictions and managing bridge load restrictions en route.',
     solution: 'Engaged specialist oversize transport attorneys in all 3 countries for permit applications. Pre-drove the route to identify bridge restrictions. Coordinated police escorts across all 3 borders. Completed in 6 days.',
     stats: [{ val:'6<span>D</span>', label:'Delivery Time' }, { val:'3<span>x</span>', label:'Countries' }, { val:'0<span>%</span>', label:'Incidents' }],
-    service: 'Land Freight (Oversize)', origin: 'Amman Industrial Zone, Jordan', dest: 'Abu Dhabi, UAE',
+    service: 'Land Freight (Oversize)', serviceKey: 'svc_land_os', origin: 'Amman Industrial Zone, Jordan', dest: 'Abu Dhabi, UAE',
     cargo: 'Turbine Components (Oversize)', weight: '47,000 kg', timeline: '6 Days', industry: 'Energy'
   }
 };
@@ -287,50 +287,74 @@ function getProjectId() {
   return parseInt(params.get('id')) || 1;
 }
 
+// ── GET LOCALIZED STRING ──
+function getT(key, fallback) {
+  const lang = localStorage.getItem('rl_lang') || 'en';
+  if (window.i18nData && window.i18nData[lang] && window.i18nData[lang][key]) {
+    return window.i18nData[lang][key];
+  }
+  return fallback;
+}
+
 // ── POPULATE PAGE ──
 function renderProject(id) {
   const p = PROJECTS[id];
   if (!p) return;
 
-  const lang = document.documentElement.lang || 'en';
-  const t = typeof translations !== 'undefined' ? translations[lang] : null;
+  const prefix = `p${id}_`;
 
-  // Use translation dictionary if available, otherwise fallback to English object
-  const titleDisplay = t ? t[`p${id}_title`] : p.titleDisplay;
-  const leadText = t ? t[`p${id}_sub`] : p.lead;
-  const cargoText = t ? t[`p${id}_cargo`] : p.cargo;
+  const titleDisplay = getT(`${prefix}title`, p.titleDisplay);
+  const leadText     = getT(`${prefix}sub`, p.lead);
+  const overviewText = getT(`${prefix}overview`, p.overview);
+  const challengeText= getT(`${prefix}challenge`, p.challenge);
+  const solutionText = getT(`${prefix}solution`, p.solution);
+  const cargoText    = getT(`${prefix}cargo`, p.cargo);
+  const badgeText    = getT(p.badgeKey, p.badge);
+  const serviceText  = getT(p.serviceKey, p.service);
+  const durText      = getT(`${prefix}dur`, p.timeline);
 
-  document.title = `${p.titleDisplay.replace(/<[^>]+>/g,'')} — Reflection Logistics`;
+  const stat1v = getT(`${prefix}stat1_v`, p.stats[0].val);
+  const stat1l = getT(`${prefix}stat1_l`, p.stats[0].label);
+  const stat2v = getT(`${prefix}stat2_v`, p.stats[1].val);
+  const stat2l = getT(`${prefix}stat2_l`, p.stats[1].label);
+  const stat3v = getT(`${prefix}stat3_v`, p.stats[2].val);
+  const stat3l = getT(`${prefix}stat3_l`, p.stats[2].label);
+
+  document.title = `${titleDisplay.replace(/<[^>]+>/g,'')} — Reflection Logistics`;
   document.getElementById('bcCurrent').textContent = titleDisplay.replace(/<[^>]+>/g,' ').replace(/\n/g,' ').trim();
   document.getElementById('pdTitle').innerHTML = titleDisplay;
-  document.getElementById('pdBadgeText').textContent = p.badge; // Add Arabic to object if needed
+  document.getElementById('pdBadgeText').textContent = badgeText;
+  
   const heroImg = document.getElementById('pdHeroImg');
   heroImg.src = p.img;
-  heroImg.alt = p.badge + ' project: ' + p.origin + ' to ' + p.dest;
+  heroImg.alt = badgeText + ' project: ' + p.origin + ' to ' + p.dest;
   
   document.getElementById('pdLead').textContent = leadText;
-  document.getElementById('pdOverview').textContent = p.overview; 
-  document.getElementById('pdChallenge').textContent = p.challenge;
-  document.getElementById('pdSolution').textContent = p.solution;
+  document.getElementById('pdOverview').textContent = overviewText; 
+  document.getElementById('pdChallenge').textContent = challengeText;
+  document.getElementById('pdSolution').textContent = solutionText;
   
-  document.getElementById('pdStat1').innerHTML = p.stats[0].val;
-  document.getElementById('pdStat2').innerHTML = p.stats[1].val;
-  document.getElementById('pdStat3').innerHTML = p.stats[2].val;
+  document.getElementById('pdStat1').innerHTML = stat1v;
+  document.getElementById('pdStat1L').textContent = stat1l;
+  document.getElementById('pdStat2').innerHTML = stat2v;
+  document.getElementById('pdStat2L').textContent = stat2l;
+  document.getElementById('pdStat3').innerHTML = stat3v;
+  document.getElementById('pdStat3L').textContent = stat3l;
   
-  document.getElementById('pdService').textContent = p.service;
+  document.getElementById('pdService').textContent = serviceText;
   document.getElementById('pdOrigin').textContent = p.origin;
   document.getElementById('pdDest').textContent = p.dest;
   document.getElementById('pdCargo').textContent = cargoText;
   document.getElementById('pdWeight').textContent = p.weight;
-  document.getElementById('pdTimeline').textContent = p.timeline;
+  document.getElementById('pdTimeline').textContent = durText;
   document.getElementById('pdIndustry').textContent = p.industry;
 
-  // ── SEO: update OG / Twitter / canonical for this specific project ──
-  const plainTitle = p.titleDisplay.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  // ── SEO ──
+  const plainTitle = titleDisplay.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
   const pageTitle = `${plainTitle} — Reflection Logistics`;
   const pageUrl   = `https://reflectionlogistics.com/project-detail.html?id=${id}`;
   const imgUrl    = `https://reflectionlogistics.com/${p.img}`;
-  const desc      = `${p.badge} project: ${p.origin} to ${p.dest}. ${p.lead.slice(0, 120)}...`;
+  const desc      = `${badgeText} project: ${p.origin} to ${p.dest}. ${leadText.slice(0, 120)}...`;
 
   document.title = pageTitle;
   document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
@@ -343,7 +367,6 @@ function renderProject(id) {
   document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', desc);
   document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', imgUrl);
 
-  // Inject JSON-LD
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -366,12 +389,12 @@ function renderProject(id) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     'headline': plainTitle,
-    'description': p.lead,
+    'description': leadText,
     'url': pageUrl,
     'image': imgUrl,
     'author': { '@type': 'Organization', 'name': 'Reflection Logistics', 'url': 'https://reflectionlogistics.com' },
     'publisher': { '@type': 'Organization', 'name': 'Reflection Logistics', 'logo': { '@type': 'ImageObject', 'url': 'https://reflectionlogistics.com/assets/images/logo.png' } },
-    'about': { '@type': 'Service', 'name': p.service, 'provider': { '@type': 'Organization', 'name': 'Reflection Logistics' } }
+    'about': { '@type': 'Service', 'name': serviceText, 'provider': { '@type': 'Organization', 'name': 'Reflection Logistics' } }
   };
   let ldScript = document.getElementById('project-ld-json');
   if (!ldScript) {
@@ -390,14 +413,34 @@ function renderOthers(currentId) {
     .filter(([id]) => parseInt(id) !== currentId)
     .slice(0, 3);
 
-  grid.innerHTML = others.map(([id, p]) => `
-    <a href="project-detail.html?id=${id}" class="pd-other-card">
-      <div class="pd-other-card-img-wrap">
-        <img class="pd-other-card-img" src="${p.img}" alt="${p.badge} project: ${p.origin} to ${p.dest}" loading="lazy" width="500" height="280">
-      </div>
-      <div class="pd-other-card-body">
-        <div class="pd-other-card-tag">${p.badge}</div>
-        <div class="pd-other-card-title">${p.titleDisplay.replace(/<[^>]+>/g,' ').trim()}</div>
+  grid.innerHTML = others.map(([id, p]) => {
+    const prefix = `p${id}_`;
+    const title = getT(`${prefix}title`, p.titleDisplay).replace(/<[^>]+>/g,' ').trim();
+    const badge = getT(p.badgeKey, p.badge);
+    const cargo = getT(`${prefix}cargo`, p.cargo);
+    
+    return `
+      <a href="project-detail.html?id=${id}" class="pd-other-card">
+        <div class="pd-other-card-img-wrap">
+          <img class="pd-other-card-img" src="${p.img}" alt="${badge} project: ${p.origin} to ${p.dest}" loading="lazy" width="500" height="280">
+        </div>
+        <div class="pd-other-card-body">
+          <div class="pd-other-card-tag">${badge}</div>
+          <div class="pd-other-card-title">${title}</div>
+          <span class="pd-other-card-cta">
+            <span data-i18n="proj_view">View Project</span>
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('img').forEach(img => {
+    img.addEventListener('load', () => img.classList.add('img-loaded'), { once: true });
+    if (img.complete && img.naturalWidth) img.classList.add('img-loaded');
+  });
+}
         <span class="pd-other-card-cta">
           View Project
           <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
