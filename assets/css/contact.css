@@ -81,3 +81,17 @@ html[lang="ar"] .acct-banner {
   border-inline-start: none;
   border-inline-end: 4px solid var(--red, #e03b3b);
 }
+
+/* Contact Arabic spacing & RTL alignment overrides */
+.con-page .con-body {
+  padding: 80px 80px 100px;
+}
+
+html[lang="ar"] .con-body .field-row {
+  direction: rtl;
+}
+
+html[lang="ar"] .con-body input,
+html[lang="ar"] .con-body textarea {
+  text-align: right;
+}

@@ -164,6 +164,19 @@ const initObserver = () => {
     .forEach(el => obs.observe(el))
 }
 
+const tagRevealTargets = () => {
+  const selectors = [
+    '.svc-card',
+    '.proj-card',
+    '.trust-item',
+    '.con-form-col',
+    '.con-sidebar'
+  ]
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'))
+  })
+}
+
 
 /* ─────────────────────────────
 NAVIGATION
@@ -211,6 +224,22 @@ const initNav = () => {
 
 }
 
+const initNavScrollState = () => {
+  const navEl = document.querySelector('nav')
+  if (!navEl) return
+
+  const threshold = 24
+  const update = () => {
+    if (window.scrollY > threshold) {
+      navEl.classList.add('nav-scrolled')
+    } else {
+      navEl.classList.remove('nav-scrolled')
+    }
+  }
+
+  update()
+  window.addEventListener('scroll', update, { passive: true })
+}
 
 
 /* ─────────────────────────────
@@ -681,6 +710,7 @@ document.addEventListener('componentsLoaded', () => {
 
   const runNonCritical = () => {
     try {
+      tagRevealTargets()
       initObserver()
       initCareers()
       initCVUpload()
@@ -688,6 +718,7 @@ document.addEventListener('componentsLoaded', () => {
       initServiceSliders()
       initPageTransitions()
       initParallax()
+      initNavScrollState()
     } catch (_) { /* fail-soft for older browsers */ }
   }
 
@@ -700,6 +731,15 @@ document.addEventListener('componentsLoaded', () => {
 })
 
 })()
+
+// Ensure service sliders are initialized even if `componentsLoaded` fires early
+document.addEventListener('DOMContentLoaded', () => {
+  try { initServiceSliders() } catch (_) {}
+})
+
+window.addEventListener('load', () => {
+  try { initServiceSliders() } catch (_) {}
+})
 
 function ensureSliderImageLoaded(slide) {
   if (!slide || slide._loaded) return;
@@ -742,6 +782,9 @@ function goToServiceSlide(slider, index) {
 function initServiceSliders() {
   const sliders = document.querySelectorAll('.svc-slider[data-slider]');
   sliders.forEach(slider => {
+    if (slider.dataset.sliderInit === 'true') return;
+    slider.dataset.sliderInit = 'true';
+
     const slides = slider.querySelectorAll('.svc-slide');
     if (!slides.length) return;
 
@@ -752,19 +795,34 @@ function initServiceSliders() {
     const next = slider.querySelector('.s-next');
     const dots = slider.querySelectorAll('.dot');
 
-    prev && prev.addEventListener('click', () => {
+    prev && prev.addEventListener('click', e => {
+      e.stopPropagation();
       goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
     });
 
-    next && next.addEventListener('click', () => {
+    next && next.addEventListener('click', e => {
+      e.stopPropagation();
       goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
     });
 
     dots.forEach(dot => {
-      dot.addEventListener('click', () => {
+      dot.addEventListener('click', e => {
+        e.stopPropagation();
         const idx = parseInt(dot.dataset.dotIndex || '0', 10);
         goToServiceSlide(slider, idx);
       });
+    });
+
+    // Keyboard navigation for accessibility
+    slider.setAttribute('tabindex', '0');
+    slider.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
+      }
     });
   });
 }
