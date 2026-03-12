@@ -69,7 +69,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="assets/images/logo.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;800&family=Cairo:wght@700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&family=Cairo:wght@700;900&family=Tajawal:wght@300;400;500;700;800&display=swap">
+  <link rel="preload" href="assets/css/style.css" as="style">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preload" href="assets/css/projects.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/projects.css"></noscript>
@@ -103,8 +104,19 @@
       <a href="project-detail.html?id=1" class="proj-card reveal" data-category="sea">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Sea Freight</span>
-          <img class="proj-card-img" src="assets/images/sea.jpg" alt="Aqaba to Rotterdam Container Shipment" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/sea-1920w.webp 1920w,
+                assets/images/sea-1280w.webp 1280w,
+                assets/images/sea-960w.webp 960w,
+                assets/images/sea-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/sea.jpg" alt="Aqaba to Rotterdam Container Shipment" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">01</div>
@@ -134,8 +146,19 @@
       <a href="project-detail.html?id=2" class="proj-card reveal reveal-d1" data-category="air">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Air Freight</span>
-          <img class="proj-card-img" src="assets/images/air.jpg" alt="Queen Alia to Dubai Air Freight" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/air-1920w.webp 1920w,
+                assets/images/air-1280w.webp 1280w,
+                assets/images/air-960w.webp 960w,
+                assets/images/air-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/air.jpg" alt="Queen Alia to Dubai Air Freight" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">02</div>
@@ -165,8 +188,19 @@
       <a href="project-detail.html?id=3" class="proj-card reveal" data-category="land">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Land Freight</span>
-          <img class="proj-card-img" src="assets/images/land.jpg" alt="Amman to Riyadh Land Freight" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/land-1920w.webp 1920w,
+                assets/images/land-1280w.webp 1280w,
+                assets/images/land-960w.webp 960w,
+                assets/images/land-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/land.jpg" alt="Amman to Riyadh Land Freight" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">03</div>
@@ -196,8 +230,19 @@
       <a href="project-detail.html?id=4" class="proj-card reveal reveal-d1" data-category="air">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Air Freight</span>
-          <img class="proj-card-img" src="assets/images/air.jpg" alt="Frankfurt to Amman Air Import" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/air-1920w.webp 1920w,
+                assets/images/air-1280w.webp 1280w,
+                assets/images/air-960w.webp 960w,
+                assets/images/air-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/air.jpg" alt="Frankfurt to Amman Air Import" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">04</div>
@@ -227,8 +272,19 @@
       <a href="project-detail.html?id=5" class="proj-card reveal" data-category="sea">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Sea Freight</span>
-          <img class="proj-card-img" src="assets/images/sea.jpg" alt="Shanghai to Aqaba LCL" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/sea-1920w.webp 1920w,
+                assets/images/sea-1280w.webp 1280w,
+                assets/images/sea-960w.webp 960w,
+                assets/images/sea-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/sea.jpg" alt="Shanghai to Aqaba LCL" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">05</div>
@@ -258,8 +314,19 @@
       <a href="project-detail.html?id=6" class="proj-card reveal reveal-d1" data-category="land">
         <div class="proj-card-img-wrap">
           <span class="proj-tag"><span class="bdot"></span> Land Freight</span>
-          <img class="proj-card-img" src="assets/images/land.jpg" alt="Amman to Abu Dhabi Land" loading="lazy" width="800" height="500" decoding="async"
-            onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="
+                assets/images/land-1920w.webp 1920w,
+                assets/images/land-1280w.webp 1280w,
+                assets/images/land-960w.webp 960w,
+                assets/images/land-640w.webp 640w
+              "
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
+            <img class="proj-card-img" src="assets/images/land.jpg" alt="Amman to Abu Dhabi Land" loading="lazy" width="800" height="500" decoding="async"
+              onerror="this.style.background='#222120';this.style.display='block';this.style.minHeight='260px'">
+          </picture>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-num">06</div>
