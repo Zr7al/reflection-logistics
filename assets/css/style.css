@@ -2,33 +2,41 @@
    SKIP LINK (accessibility)
    ============================================================ */
 /* ── SKIP LINK FIX (Prevents scroll glitch) ── */
+/* ── SKIP LINK (Ghost Fix) ── */
 .skip-link {
   position: absolute;
-  top: 0;
-  inset-inline-start: 50%;
-  transform: translateX(-50%) translateY(-100%); /* Center it horizontally */
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10001;
   padding: 10px 20px;
   background: var(--red);
   color: #fff;
+  font-family: 'Barlow', sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
-  border-radius: 0 0 8px 8px;
+  border-radius: 4px;
   
-  /* The Secret Sauce: hide it from the cursor/scroll entirely */
-  visibility: hidden; 
-  pointer-events: none;
-  transition: transform 0.2s ease, visibility 0s 0.2s;
+  /* Use clip-path and overflow to make it literally 1x1 pixel */
+  /* This prevents it from appearing during "rubber-band" scrolling */
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 .skip-link:focus {
-  transform: translateX(-50%) translateY(0);
-  visibility: visible;
-  pointer-events: auto;
-  transition: transform 0.2s ease, visibility 0s;
+  /* Bring it back to full size only on keyboard focus */
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+  outline: 3px solid #fff;
 }
-
 /* ============================================================
    DESIGN TOKENS
    ============================================================ */
@@ -70,12 +78,14 @@ section {
    RESET & BASE
    ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden;overscroll-behavior-y: none; }
+html {
+  scroll-behavior: smooth;
+  /* Stops the bounce effect that reveals hidden elements */
+  overscroll-behavior-y: none; 
+}
 body {
-  font-family: 'Barlow', sans-serif;
-  background: var(--black);
-  color: var(--white);
-  /* Extra safeguard for horizontal leaks */
+  /* Ensure the body is a tight container */
+  position: relative;
   overflow-x: hidden;
   width: 100%;
 }
@@ -334,12 +344,15 @@ nav.nav-scrolled {
 /* ============================================================
    HERO
    ============================================================ */
-.hero {
-  min-height: 92vh;
-  position: relative;
-  display: flex; align-items: flex-end;
-  overflow: hidden;
-}
+   .hero {
+    min-height: 85vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* This acts as a 'hard wall' for any elements trying to leak out the top */
+    overflow: hidden; 
+    padding-top: 90px;
+  }
 
 /* FIX: .hero-img was a CSS background-image div — replaced by real <img> tag
    in index.html for LCP. This rule kept as fallback only. */
