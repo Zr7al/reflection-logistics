@@ -1,22 +1,33 @@
 /* ============================================================
    SKIP LINK (accessibility)
    ============================================================ */
+/* ── SKIP LINK FIX (Prevents scroll glitch) ── */
 .skip-link {
   position: absolute;
-  top: 6px;
-  inset-inline-start: 12px;
-  z-index: 99999;
-  padding: 8px 18px;
-  background: var(--red, #c8391a);
+  top: 0;
+  inset-inline-start: 50%;
+  transform: translateX(-50%) translateY(-100%); /* Center it horizontally */
+  z-index: 10001;
+  padding: 10px 20px;
+  background: var(--red);
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  border-radius: 0 0 4px 4px;
   text-decoration: none;
-  white-space: nowrap;
-  transform: translateY(calc(-100% - 20px));
+  border-radius: 0 0 8px 8px;
+  
+  /* The Secret Sauce: hide it from the cursor/scroll entirely */
+  visibility: hidden; 
+  pointer-events: none;
+  transition: transform 0.2s ease, visibility 0s 0.2s;
 }
-.skip-link:focus { transform: translateY(0); }
+
+.skip-link:focus {
+  transform: translateX(-50%) translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.2s ease, visibility 0s;
+}
 
 /* ============================================================
    DESIGN TOKENS
@@ -59,11 +70,14 @@ section {
    RESET & BASE
    ============================================================ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden;overscroll-behavior-y: none; }
 body {
   font-family: 'Barlow', sans-serif;
   background: var(--black);
   color: var(--white);
+  /* Extra safeguard for horizontal leaks */
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ============================================================
@@ -165,6 +179,9 @@ nav {
   backdrop-filter: var(--glass);
   -webkit-backdrop-filter: var(--glass);
   transition: padding 0.25s ease, height 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  will-change: height, background-color, box-shadow;
+  /* Prevents jitter during high-speed scrolling */
+  transform: translateZ(0);
 }
 
 nav.nav-scrolled {
