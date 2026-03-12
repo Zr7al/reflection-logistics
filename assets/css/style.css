@@ -27,7 +27,7 @@
   --black3:  #222120;
   --red:     #c8391a;
   --red2:    #e0421f;
-  --white:   #f5f0eb;
+  --white:   #ffffff;
   --muted:   #ddd8d7;
   --border:  rgba(255,255,255,0.07);
   --border2: rgba(200,57,26,0.25);
@@ -169,7 +169,6 @@ nav {
 
 nav.nav-scrolled {
   height: 68px;
-  padding-inline: 48px;
   background: #ffffff;
   box-shadow: 0 6px 26px rgba(0,0,0,0.18);
 }
@@ -551,10 +550,13 @@ nav.nav-scrolled {
   border-top: 1px solid var(--border);
 }
 .index-prefooter-inner {
-  max-width: 1280px; margin: 0 auto; padding: 72px 60px;
-  display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 72px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
   align-items: center;
-  border-bottom: 1px solid var(--border);
 }
 .index-prefooter-left h2 {
   font-family: 'Bebas Neue', sans-serif;
@@ -581,10 +583,17 @@ nav.nav-scrolled {
 /* ============================================================
    FOOTER MAIN
    ============================================================ */
-footer { background: #ffffff; border-top: 1px solid #e8e3de; }
+footer {
+  background: #ffffff;
+  border-top: 1px solid #e8e3de;
+}
 .footer-top {
-  max-width: 1280px; margin: 0 auto; padding: 60px 60px 48px;
-  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 60px 48px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
   border-bottom: 1px solid #e8e3de;
 }
 .footer-brand img { height: 90px; width: auto; margin-bottom: 16px; display: block; }
@@ -624,7 +633,9 @@ footer { background: #ffffff; border-top: 1px solid #e8e3de; }
    PAGE HERO (inner pages)
    ============================================================ */
 .page-hero {
-  padding: 110px 60px 50px;
+  /* Enough top padding to clear the fixed nav in all languages,
+     with a tighter bottom to avoid dead space under the copy. */
+  padding: 110px 60px 32px;
   background: var(--black2);
   border-bottom: 1px solid var(--border);
   min-height: auto;
@@ -661,9 +672,11 @@ footer { background: #ffffff; border-top: 1px solid #e8e3de; }
 /* FIX: was declared twice (conflicting font-size values). Merged into single rule. */
 .page-hero h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(38px, 5vw, 64px);
-  line-height: 0.92; letter-spacing: 2px;
-  color: var(--white); margin-bottom: 12px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: var(--white);
+  margin-bottom: 8px;
 }
 .page-hero p {
   font-size: 14px;
@@ -676,10 +689,10 @@ footer { background: #ffffff; border-top: 1px solid #e8e3de; }
 /* ============================================================
    SERVICES PAGE
    ============================================================ */
-.svc-wrap { background: var(--black); padding: 60px 80px 80px; }
-.svc-inner { max-width: 1280px; margin: 0 auto; }
+   .svc-wrap { background: var(--black); padding: 40px 80px 50px; }
+   .svc-inner { max-width: 1280px; margin: 0 auto; }
 
-.svc-section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.svc-section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .svc-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .svc-section-label span {
   font-family: 'Barlow Condensed', sans-serif;
@@ -768,7 +781,7 @@ footer { background: #ffffff; border-top: 1px solid #e8e3de; }
 }
 
 .svc-card-body {
-  padding: 24px 24px 32px;
+  padding: 18px 20px 22px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -856,7 +869,7 @@ button.svc-cta[disabled] {
   user-select: none;
 }
 
-.svc-cta-strip { background: var(--black2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.svc-cta-strip { background: var(--black2); border-top: 1px solid var(--border); }
 .svc-cta-strip-inner {
   max-width: 1280px; margin: 0 auto; padding: 44px 80px;
   display: flex; align-items: center; justify-content: space-between; gap: 40px;
@@ -892,21 +905,44 @@ button.svc-cta[disabled] {
 }
 
 .con-body {
-  max-width: 1280px; margin: 0 auto;
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 72px 80px 80px;
-  display: grid; grid-template-columns: 1fr 360px;
+
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap:60px;
 }
 .con-form-col {
-  padding: 44px 52px 44px 0;
-  border-inline-end: 1px solid var(--border); /* FIX: logical property — works in RTL without override */
+  /* This moves the 52px gap away from the divider in both EN and AR */
+  padding-block: 44px;
+  padding-inline-start: 0;
+  padding-inline-end: 52px;
+  border-inline-end: 1px solid var(--border);
 }
 .con-form-heading {
   font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px;
 }
-.cform { display: flex; flex-direction: column; gap: 16px; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.field { display: flex; flex-direction: column; gap: 6px; }
+.cform{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  }
+
+.field-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:6px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  }
+
 .field label {
   font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
@@ -957,7 +993,7 @@ button.svc-cta[disabled] {
   background-repeat: no-repeat; background-position: right 13px center; padding-inline-end: 36px; cursor: pointer;
 }
 .field select option { background: #1a1918; color: var(--white); }
-.field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.field textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
 
 /* FIX: accounting-fields — should be display:none default, display:grid when visible
    so the field-row grid inside works correctly */
@@ -1004,7 +1040,16 @@ button.svc-cta[disabled] {
 .form-success p { color: var(--muted); font-size: 14px; line-height: 1.7; }
 
 /* Contact Sidebar */
-.con-sidebar { padding: 44px 0 44px 36px; display: flex; flex-direction: column; gap: 28px; }
+.con-sidebar { 
+  /* This moves the 36px gap away from the divider in both EN and AR */
+  padding-block: 44px;
+  padding-inline-start: 36px;
+  padding-inline-end: 0;
+  display: flex; 
+  flex-direction: column; 
+  gap: 28px; 
+}
+
 .sdb-block { display: flex; flex-direction: column; gap: 14px; }
 .sdb-label {
   font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
@@ -1045,11 +1090,21 @@ button.svc-cta[disabled] {
 .ops-note strong { color: var(--white); }
 
 /* 24/7 ops badge */
-.ops-badge {
-  display: flex; align-items: center; gap: 10px;
-  background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25);
-  border-radius: 10px; padding: 12px 16px;
+.ops-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+
+  background:rgba(37,211,102,0.1);
+  border:1px solid rgba(37,211,102,0.25);
+  border-radius:10px;
+
+  padding:12px 16px;
+  margin-bottom:30px;
+
+  max-width:420px;
 }
+
 .ops-badge-dot {
   width: 8px; height: 8px; border-radius: 50%; background: #25D366;
   box-shadow: 0 0 6px rgba(37,211,102,0.7); flex-shrink: 0;
@@ -1108,24 +1163,66 @@ button.svc-cta[disabled] {
 /* ============================================================
    TRUST / CERTIFICATIONS STRIP
    ============================================================ */
-.trust-strip { padding: 48px 0; border-top: 1px solid var(--border); }
-.trust-strip-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-.trust-label {
+ .trust-strip {
+  padding: 44px 0 40px;
+  border-top: 1px solid var(--border);
+  background: var(--black);
+}
+  .trust-strip-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding-inline: 32px; 
+  }
+  .trust-label {
   text-align: center; font-size: 11px; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: rgba(255,255,255,0.35); margin-bottom: 28px;
 }
-.trust-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 40px; }
-.trust-item { display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.45; transition: opacity 0.2s; cursor: default; }
-.trust-item:hover { opacity: 0.75; }
-.trust-item-badge {
-  width: 64px; height: 64px;
-  border: 1.5px solid rgba(255,255,255,0.2); border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.04);
-  text-align: center; line-height: 1.3;
+.trust-logos { 
+  display: flex; 
+  align-items: flex-start; 
+  justify-content: center; 
+  flex-wrap: wrap; 
+  gap: 48px; 
+  /* Critical for RTL centering */
+  direction: ltr; 
 }
+.trust-item { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center;
+  /* This prevents the box from growing/shrinking based on text length */
+  flex: 0 0 120px; 
+  gap: 12px; 
+  opacity: 0.45; 
+  direction: rtl; /* Switch back to RTL for the text inside */
+}
+.trust-item:hover { 
+  opacity: 0.75; 
+}
+.trust-item-badge {
+  width: 72px;
+  height: 72px;
+  border: 1.5px solid rgba(255,255,255,0.2); 
+  border-radius: 12px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; 
+  font-weight: 700; 
+  color: #fff;
+}
+
+/* Force Arabic font for the small labels below the badge */
+html[lang="ar"] .trust-item-label {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
 .trust-item-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
 
 .jobs-wrap { max-width: 1280px; margin: 0 auto; padding: 56px 60px 96px; }
@@ -1331,6 +1428,18 @@ button.svc-cta[disabled] {
    RESPONSIVE — 1100px
    ============================================================ */
 @media (max-width: 1100px) {
+  .con-form-col {
+    padding-block: 44px;
+    padding-inline-start: 0;
+    /* Use a margin instead of padding to force a physical gap from the border */
+    margin-inline-end: 52px;
+    border-inline-end: 1px solid var(--border);
+  }
+  .con-sidebar { 
+    padding-block: 44px;
+    padding-inline-start: 36px;
+    margin-inline-start: 0;
+  }
   nav { padding-inline: 28px; }
   .hero-content { padding: 0 36px 64px; }
   .hero-bottom { padding: 0 36px 28px; }
@@ -1403,6 +1512,11 @@ button.svc-cta[disabled] {
   .nav-links a::after { display: none; }
   .nav-links a:hover { background: rgba(200,57,26,0.06); color: #1a1918; padding-inline-start: 12px; }
   #langToggle { font-size: 11px; padding: 5px 10px; }
+
+  /* Keep mobile dropdown flush with shrunken nav on scroll */
+  nav.nav-scrolled .nav-links {
+    top: 68px;
+  }
 
   .hero { min-height: 100vh; min-height: 100svh; }
   .hero-content { padding: 0 20px 72px; }
@@ -1675,10 +1789,6 @@ html[lang="ar"] .submit-btn:hover .material-symbols-outlined { transform: scaleX
 /* Careers */
 html[lang="ar"] .job-item.active .job-toggle { transform: rotate(-180deg); }
 
-/* Contact form — physical padding doesn't auto-flip */
-html[dir="rtl"] .con-form-col { padding: 44px 52px 44px 0; }
-html[dir="rtl"] .con-sidebar  { padding: 44px 0 44px 36px; }
-
 /* Forms — RTL alignment and padding */
 html[dir="rtl"] input,
 html[dir="rtl"] textarea,
@@ -1736,7 +1846,7 @@ html[lang="ar"] .scard-body           { padding: 30px 26px 28px; }
 html[lang="ar"] .scard p              { line-height: 1.9; margin-bottom: 24px; }
 html[lang="ar"] .customs-text p,
 html[lang="ar"] .customs-text h2      { margin-bottom: 18px; }
-html[lang="ar"] .page-hero p         { line-height: 1.9; }
+html[lang="ar"] .page-hero p         { line-height: 1.7; }
 html[lang="ar"] .careers-hero p      { line-height: 1.9; }
 
 /* ── RTL MOBILE OVERRIDES ── */
@@ -1916,3 +2026,166 @@ body.page-exiting {
 
 /* RTL Flip for Arabic mode */
 html[dir="rtl"] .slider-nav button { transform: translateY(-50%) scaleX(-1); }
+.svc-section-label.soon{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:40px 0 24px;
+  font-family:"Barlow Condensed",sans-serif;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#aaa;
+  }
+  
+  .svc-section-label.soon .dot{
+  width:6px;
+  height:6px;
+  background:#ffffff;
+  border-radius:50%;
+  }
+  
+  .svc-section-label.soon::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:rgba(255,255,255,0.08);
+  margin-left:10px;
+  }
+  /* Slider arrows */
+
+.s-prev,
+.s-next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:42px;
+height:42px;
+border-radius:50%;
+border:none;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:rgba(0,0,0,0.45);
+backdrop-filter:blur(6px);
+
+color:white;
+font-size:18px;
+cursor:pointer;
+
+z-index:6;
+
+transition:all .25s ease;
+}
+
+/* left arrow */
+.s-prev{
+left:14px;
+}
+
+/* right arrow */
+.s-next{
+right:14px;
+}
+
+/* hover effect */
+.s-prev:hover,
+.s-next:hover{
+background:rgba(255,70,30,0.9);
+transform:translateY(-50%) scale(1.08);
+box-shadow:0 6px 16px rgba(0,0,0,.4);
+}
+/* slider arrows icon */
+.s-prev::before,
+.s-next::before{
+content:"";
+display:block;
+width:10px;
+height:10px;
+border-top:2px solid #fff;
+border-right:2px solid #fff;
+}
+
+.s-prev::before{
+transform:rotate(-135deg);
+}
+
+.s-next::before{
+transform:rotate(45deg);
+}
+/* slider arrows */
+.s-prev,
+.s-next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:44px;
+height:44px;
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:rgba(0,0,0,0.45);
+border:1px solid rgba(255,255,255,0.15);
+
+cursor:pointer;
+z-index:6;
+
+transition:all .25s ease;
+}
+
+.s-prev{
+left:16px;
+}
+
+.s-next{
+right:16px;
+}
+
+/* hover effect */
+.s-prev:hover,
+.s-next:hover{
+background:#ff461e;
+transform:translateY(-50%) scale(1.08);
+box-shadow:0 6px 18px rgba(0,0,0,.35);
+}
+.s-prev,
+.s-next{
+opacity:0;
+}
+
+.svc-card-img-wrap:hover .s-prev,
+.svc-card-img-wrap:hover .s-next{
+opacity:1;
+}
+.svc-card-img-wrap::after{
+  pointer-events:none;
+  }
+  /* CONTACT PAGE SPACING FIX */
+
+  .con-body{
+    margin-top:20px;
+  }
+  
+  .page-hero{
+  padding-bottom:80px;
+  }
+  
+  .acct-banner{
+  margin-bottom:30px;
+  }
+  
+  /* Arabic RTL form alignment */
+  html[lang="ar"] .field-row{
+  direction:rtl;
+  }
+  
+html[lang="ar"] input,
+html[lang="ar"] textarea,
+html[lang="ar"] select {
+  text-align: right;
+}

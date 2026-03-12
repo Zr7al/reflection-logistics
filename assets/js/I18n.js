@@ -24,15 +24,21 @@ function resolveLang() {
   return DEFAULT_LANG;
 }
 
-/* ── 2. SET DIRECTION IMMEDIATELY (before layout) — prevents RTL flash ── */
+/* ── 2. SET DIRECTION IMMEDIATELY (Fixed for RTL Scroll Bug) ── */
 const initialLang = resolveLang();
 document.documentElement.lang = initialLang;
 document.documentElement.dir = initialLang === 'ar' ? 'rtl' : 'ltr';
 document.documentElement.dataset.langReady = 'false';
+
 if (initialLang === 'ar') {
+  // Force the browser to recognize the right edge as the starting point
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(document.documentElement.scrollWidth, 0);
+  
   requestAnimationFrame(() => {
     document.documentElement.scrollLeft = 0;
     if (document.body) document.body.scrollLeft = 0;
+    document.documentElement.style.scrollBehavior = 'smooth';
   });
 }
 
@@ -122,8 +128,19 @@ async function applyLang(lang) {
 
   const btn = document.getElementById('langToggle');
   if (btn) {
+    // If we're on careers page, keep button label but make it visually/semantically disabled.
+    const isCareers = location.pathname.split('/').pop().split('?')[0] === 'careers.html';
     btn.textContent = lang === 'ar' ? 'EN' : 'عربي';
     btn.setAttribute('aria-label', lang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
+    if (isCareers) {
+      btn.setAttribute('aria-disabled', 'true');
+      btn.style.opacity = '0.4';
+      btn.style.cursor = 'not-allowed';
+    } else {
+      btn.removeAttribute('aria-disabled');
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+    }
   }
 
   const t = translations[lang];
@@ -160,6 +177,8 @@ async function initI18n() {
   const btn = document.getElementById('langToggle');
   if (btn) {
     btn.addEventListener('click', () => {
+      const isCareers = location.pathname.split('/').pop().split('?')[0] === 'careers.html';
+      if (isCareers) return; // disabled on careers page
       const current = (() => {
         try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return ''; }
       })() || DEFAULT_LANG;

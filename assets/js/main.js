@@ -229,12 +229,12 @@ const initNavScrollState = () => {
   if (!navEl) return
 
   const threshold = 24
+  let isScrolled = null
   const update = () => {
-    if (window.scrollY > threshold) {
-      navEl.classList.add('nav-scrolled')
-    } else {
-      navEl.classList.remove('nav-scrolled')
-    }
+    const scrolled = window.scrollY > threshold
+    if (scrolled === isScrolled) return
+    isScrolled = scrolled
+    navEl.classList.toggle('nav-scrolled', scrolled)
   }
 
   update()
@@ -795,23 +795,35 @@ function initServiceSliders() {
     const next = slider.querySelector('.s-next');
     const dots = slider.querySelectorAll('.dot');
 
-    prev && prev.addEventListener('click', e => {
+    prev && prev.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
-    });
+  
+      goToServiceSlide(
+          slider,
+          currentServiceSlideIndex(slider) - 1
+      );
+  });
 
-    next && next.addEventListener('click', e => {
-      e.stopPropagation();
-      goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
-    });
+  next && next.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    goToServiceSlide(
+        slider,
+        currentServiceSlideIndex(slider) + 1
+    );
+});
 
     dots.forEach(dot => {
-      dot.addEventListener('click', e => {
-        e.stopPropagation();
-        const idx = parseInt(dot.dataset.dotIndex || '0', 10);
-        goToServiceSlide(slider, idx);
+      dot.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+  
+          const idx = parseInt(dot.dataset.dotIndex || "0", 10);
+          goToServiceSlide(slider, idx);
       });
-    });
+  });
 
     // Keyboard navigation for accessibility
     slider.setAttribute('tabindex', '0');
