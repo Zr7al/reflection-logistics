@@ -8,23 +8,23 @@ require 'vendor/phpmailer/src/SMTP.php';
 require 'config.php';
 
 header('Content-Type: application/json; charset=utf-8');
-// Restrict CORS to the production origin; remove wildcard to prevent abuse
+// Restrict CORS to the production origin to prevent unauthorized API abuse
 header('Access-Control-Allow-Origin: https://reflectionlogistics.com');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['success' => false, 'message' => 'Invalid request']);
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
     exit;
 }
 
 // 1. HONEYPOT SECURITY CHECK
-// Bots will see this hidden field and fill it out automatically.
+// Bots typically fill all visible and hidden fields. If this is filled, it's a bot.
 if (!empty($_POST['honeypot'])) {
-    // Return success to trick the bot into stopping, but do not send the email.
     echo json_encode(['success' => true, 'message' => 'Filtered as spam.']);
     exit;
 }
 
 // 2. DATA SANITIZATION
+// Strip HTML tags and trim whitespace from text inputs
 $name     = strip_tags(trim($_POST['applicant_name'] ?? ''));
 $email    = filter_var(trim($_POST['applicant_email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $phone    = strip_tags(trim($_POST['applicant_phone'] ?? ''));
@@ -36,14 +36,23 @@ if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || !$position) {
     exit;
 }
 
-// 4. CV UPLOAD VALIDATION
+// 4. CV UPLOAD & SECURITY VALIDATION
 if (empty($_FILES['cv']['tmp_name']) || $_FILES['cv']['error'] !== UPLOAD_ERR_OK) {
     echo json_encode(['success' => false, 'message' => 'CV file is required and must be uploaded correctly.']);
     exit;
 }
 
-// Verify MIME Type for security (don't trust the file extension alone)
-$allowedTypes = [
+// A. File Extension Whitelist
+$allowedExtensions = ['pdf', 'doc', 'docx'];
+$fileExtension = strtolower(pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION));
+
+if (!in_array($fileExtension, $allowedExtensions)) {
+    echo json_encode(['success' => false, 'message' => 'Invalid file extension. Only PDF, DOC, and DOCX are allowed.']);
+    exit;
+}
+
+// B. MIME Type Validation (Server-side check of the actual file content)
+$allowedMimeTypes = [
     'application/pdf', 
     'application/msword', 
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
@@ -52,14 +61,14 @@ $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $mimeType = finfo_file($finfo, $_FILES['cv']['tmp_name']);
 finfo_close($finfo);
 
-if (!in_array($mimeType, $allowedTypes)) {
-    echo json_encode(['success' => false, 'message' => 'Invalid file type. Please upload a PDF or Word document.']);
+if (!in_array($mimeType, $allowedMimeTypes)) {
+    echo json_encode(['success' => false, 'message' => 'Invalid file content. Please upload a genuine PDF or Word document.']);
     exit;
 }
 
-// Limit file size to 5MB
+// C. File Size Limit (5MB)
 if ($_FILES['cv']['size'] > 5 * 1024 * 1024) {
-    echo json_encode(['success' => false, 'message' => 'File too large. Max 5MB allowed.']);
+    echo json_encode(['success' => false, 'message' => 'File too large. Maximum size is 5MB.']);
     exit;
 }
 
@@ -77,7 +86,7 @@ try {
 
     // Recipients
     $mail->setFrom(SMTP_USER, 'Reflection Logistics Careers');
-    $mail->addAddress(SMTP_USER); 
+    $mail->addAddress(CONTACT_RECEIVER); // Use designated receiver from config
     $mail->addReplyTo($email, $name);
 
     // Content
@@ -99,17 +108,20 @@ try {
         <p style='margin-top:16px; color:#555; font-size:13px;'>The applicant's CV is attached to this email.</p>
     </div>";
 
-    // Attach CV with a clean, standardized filename
+    // D. Safe Attachment Filename Generation
+    // Remove all non-alphanumeric characters from name and position to prevent injection or filesystem issues
+    $safeName     = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
     $safePosition = preg_replace('/[^a-zA-Z0-9]/', '_', $position);
-    $extension = pathinfo($_FILES['cv']['name'], PATHINFO_EXTENSION);
+    
     $mail->addAttachment(
         $_FILES['cv']['tmp_name'],
-        "CV_{$name}_{$safePosition}.{$extension}"
+        "CV_{$safeName}_{$safePosition}.{$fileExtension}"
     );
 
     $mail->send();
     echo json_encode(['success' => true]);
 
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => "Mailer Error: {$mail->ErrorInfo}"]);
+    // For security, do not leak SMTP host details; use generic error in production if preferred
+    echo json_encode(['success' => false, 'message' => "Mailer Error: Contact support if this persists."]);
 }
