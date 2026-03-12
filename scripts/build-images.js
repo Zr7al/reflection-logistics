@@ -1,5 +1,5 @@
 /**
- * Generate WebP and responsive image sizes for performance.
+ * Generate WebP, AVIF (hero only), and responsive image sizes for performance.
  * Run: npm install && npm run build:images
  */
 const fs = require('fs');
@@ -7,12 +7,10 @@ const path = require('path');
 const sharp = require('sharp');
 
 const IMAGES_DIR = path.join(__dirname, '../assets/images');
+const QUALITY = 65;
 const SIZES = {
-  // Hero: 480 / 960 / 1280 only (no 1920)
   hero: [1280, 960, 480],
-  // Content images: 400 / 800 / 1200
   card: [1200, 800, 400],
-  // Smaller thumbs where applicable
   thumb: [800, 400],
 };
 
@@ -26,32 +24,43 @@ async function processImage(filename) {
   if (!fs.existsSync(inputPath)) return;
 
   const meta = await sharp(inputPath).metadata();
-  const w = meta.width || 800;
+  const imgW = meta.width || 800;
 
-  // Hero images detected by name; everything else uses card/thumb sizes
   let sizes;
   if (/hero/i.test(base)) {
     sizes = SIZES.hero;
   } else {
-    sizes = w > 800 ? SIZES.card : SIZES.thumb;
+    sizes = imgW > 800 ? SIZES.card : SIZES.thumb;
   }
-  sizes = [...new Set(sizes)].filter(w => w <= (meta.width || 0)).sort((a, b) => b - a);
-  if (sizes.length === 0) sizes = [meta.width];
+  sizes = [...new Set(sizes)].filter(s => s <= imgW).sort((a, b) => b - a);
+  if (sizes.length === 0) sizes = [imgW];
 
   for (const w of sizes) {
     const webpPath = path.join(IMAGES_DIR, `${base}-${w}.webp`);
     await sharp(inputPath)
       .resize(w)
-      .webp({ quality: 70 }) // target 65–70 for smaller payload
+      .webp({ quality: QUALITY })
       .toFile(webpPath);
     console.log('  →', path.basename(webpPath));
   }
 
   const fullWebp = path.join(IMAGES_DIR, `${base}.webp`);
   await sharp(inputPath)
-    .webp({ quality: 70 })
+    .webp({ quality: QUALITY })
     .toFile(fullWebp);
   console.log('  →', path.basename(fullWebp));
+
+  // Hero: also generate AVIF for better compression
+  if (/hero/i.test(base)) {
+    for (const w of sizes) {
+      const avifPath = path.join(IMAGES_DIR, `${base}-${w}.avif`);
+      await sharp(inputPath)
+        .resize(w)
+        .avif({ quality: QUALITY })
+        .toFile(avifPath);
+      console.log('  →', path.basename(avifPath));
+    }
+  }
 }
 
 async function main() {
