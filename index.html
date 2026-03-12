@@ -146,8 +146,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- #3 & #8: Hero image as real <img> for LCP + fetchpriority + preload -->
-  <link rel="preload" as="image" href="assets/images/hero-1280w.webp" fetchpriority="high">
+  <link
+    rel="preload"
+    as="image"
+    href="assets/images/hero-960.webp"
+    imagesrcset="
+      assets/images/hero-480.webp 480w,
+      assets/images/hero-960.webp 960w,
+      assets/images/hero-1280.webp 1280w
+    "
+    imagesizes="(min-width: 1200px) 1200px, 100vw"
+    fetchpriority="high">
   <link rel="preload" as="image" href="assets/images/logo.png">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -164,25 +173,24 @@
 
   <!-- ── HERO ── -->
   <section class="hero">
-    <!-- LCP hero image: responsive WebP with JPEG fallback -->
     <picture>
       <source
         type="image/webp"
         srcset="
-          assets/images/hero-1920w.webp 1920w,
-          assets/images/hero-1280w.webp 1280w,
-          assets/images/hero-960w.webp 960w,
-          assets/images/hero-640w.webp 640w
+          assets/images/hero-480.webp 480w,
+          assets/images/hero-960.webp 960w,
+          assets/images/hero-1280.webp 1280w
         "
-        sizes="100vw">
+        sizes="(min-width: 1200px) 1200px, 100vw">
       <img
         class="hero-img-tag"
-        src="assets/images/hero.jpg"
+        src="assets/images/hero-960.webp"
         alt="Reflection Logistics — Jordan's Global Freight Partner"
-        width="1920"
-        height="1080"
+        width="1280"
+        height="720"
+        loading="eager"
         fetchpriority="high"
-        decoding="sync"
+        decoding="async"
       >
     </picture>
     <div class="hero-content">
@@ -285,13 +293,12 @@
               <source
                 type="image/webp"
                 srcset="
-                  assets/images/air-1920w.webp 1920w,
-                  assets/images/air-1280w.webp 1280w,
-                  assets/images/air-960w.webp 960w,
-                  assets/images/air-640w.webp 640w
+                  assets/images/air-400.webp 400w,
+                  assets/images/air-800.webp 800w,
+                  assets/images/air-1200.webp 1200w
                 "
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
-              <img class="scard-img" src="assets/images/air.jpg" alt="Air freight cargo at Queen Alia International Airport, Jordan" loading="lazy" width="600" height="400" decoding="async">
+              <img class="scard-img" src="assets/images/air-800.webp" alt="Air freight cargo at Queen Alia International Airport, Jordan" loading="lazy" width="800" height="450" decoding="async">
             </picture>
           </div>
           <div class="scard-body">
@@ -309,13 +316,12 @@
               <source
                 type="image/webp"
                 srcset="
-                  assets/images/land-1920w.webp 1920w,
-                  assets/images/land-1280w.webp 1280w,
-                  assets/images/land-960w.webp 960w,
-                  assets/images/land-640w.webp 640w
+                  assets/images/land-400.webp 400w,
+                  assets/images/land-800.webp 800w,
+                  assets/images/land-1200.webp 1200w
                 "
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
-              <img class="scard-img" src="assets/images/land.jpg" alt="Land freight truck on GCC highway for cross-border Jordan freight" loading="lazy" width="600" height="400" decoding="async">
+              <img class="scard-img" src="assets/images/land-800.webp" alt="Land freight truck on GCC highway for cross-border Jordan freight" loading="lazy" width="800" height="450" decoding="async">
             </picture>
           </div>
           <div class="scard-body">
@@ -333,13 +339,12 @@
               <source
                 type="image/webp"
                 srcset="
-                  assets/images/sea-1920w.webp 1920w,
-                  assets/images/sea-1280w.webp 1280w,
-                  assets/images/sea-960w.webp 960w,
-                  assets/images/sea-640w.webp 640w
+                  assets/images/sea-400.webp 400w,
+                  assets/images/sea-800.webp 800w,
+                  assets/images/sea-1200.webp 1200w
                 "
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw">
-              <img class="scard-img" src="assets/images/sea.jpg" alt="Container shipping at Port of Aqaba, Jordan" loading="lazy" width="600" height="400" decoding="async">
+              <img class="scard-img" src="assets/images/sea-800.webp" alt="Container shipping at Port of Aqaba, Jordan" loading="lazy" width="800" height="450" decoding="async">
             </picture>
           </div>
           <div class="scard-body">

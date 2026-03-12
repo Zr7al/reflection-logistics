@@ -185,67 +185,64 @@
 
     <div class="svc-grid">
 
-      <!-- Air Freight card (no nested anchors; link on image + CTA only) -->
+      <!-- Air Freight card -->
       <div class="svc-card">
         <a href="contact.html" class="svc-card-img-link">
           <div class="svc-card-img-wrap">
             <span class="svc-badge"><span class="bdot"></span> Active</span>
 
-            <div class="svc-slider">
+            <div class="svc-slider" data-slider>
               <div class="svc-slides">
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="0">
                   <picture>
                     <source
                       type="image/webp"
                       srcset="
-                        assets/images/air-1920w.webp 1920w,
-                        assets/images/air-1280w.webp 1280w,
-                        assets/images/air-960w.webp 960w,
-                        assets/images/air-640w.webp 640w
+                        assets/images/air-400.webp 400w,
+                        assets/images/air-800.webp 800w,
+                        assets/images/air-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img img-loaded" src="assets/images/air.jpg" alt="Air freight cargo at Queen Alia International Airport, Jordan" width="600" height="400" loading="lazy" decoding="async">
+                    <img class="svc-card-img" src="assets/images/air-800.webp" alt="Air freight cargo at Queen Alia International Airport, Jordan" width="800" height="450" loading="lazy" decoding="async">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="1">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/air2-1920w.webp 1920w,
-                        assets/images/air2-1280w.webp 1280w,
-                        assets/images/air2-960w.webp 960w,
-                        assets/images/air2-640w.webp 640w
+                      data-srcset="
+                        assets/images/air2-400.webp 400w,
+                        assets/images/air2-800.webp 800w,
+                        assets/images/air2-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/air2.jpg" alt="Air cargo handling for international freight from Jordan" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/air2-800.webp" alt="Air cargo handling for international freight from Jordan" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="2">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/air3-1920w.webp 1920w,
-                        assets/images/air3-1280w.webp 1280w,
-                        assets/images/air3-960w.webp 960w,
-                        assets/images/air3-640w.webp 640w
+                      data-srcset="
+                        assets/images/air3-400.webp 400w,
+                        assets/images/air3-800.webp 800w,
+                        assets/images/air3-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/air3.jpg" alt="Freight aircraft for time-critical shipments" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/air3-800.webp" alt="Freight aircraft for time-critical shipments" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
               </div>
 
               <div class="slider-nav">
-                <button class="s-prev" aria-label="Previous image" onclick="event.preventDefault(); moveSlide(this, -1)">❮</button>
-                <button class="s-next" aria-label="Next image" onclick="event.preventDefault(); moveSlide(this, 1)">❯</button>
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
               </div>
 
               <div class="slider-dots">
-                <span class="dot active" onclick="event.preventDefault(); setSlide(this, 0)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 1)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 2)"></span>
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
+                <button class="dot" type="button" data-dot-index="2" aria-label="Slide 3"></button>
               </div>
             </div>
           </div>
@@ -266,61 +263,58 @@
           <div class="svc-card-img-wrap">
             <span class="svc-badge"><span class="bdot"></span> Active</span>
 
-            <div class="svc-slider">
+            <div class="svc-slider" data-slider>
               <div class="svc-slides">
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="0">
                   <picture>
                     <source
                       type="image/webp"
                       srcset="
-                        assets/images/sea-1920w.webp 1920w,
-                        assets/images/sea-1280w.webp 1280w,
-                        assets/images/sea-960w.webp 960w,
-                        assets/images/sea-640w.webp 640w
+                        assets/images/sea-400.webp 400w,
+                        assets/images/sea-800.webp 800w,
+                        assets/images/sea-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/sea.jpg" alt="Sea freight container ship at the Port of Aqaba, Jordan" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" src="assets/images/sea-800.webp" alt="Sea freight container ship at the Port of Aqaba, Jordan" loading="lazy" width="800" height="450" decoding="async">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="1">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/sea2-1920w.webp 1920w,
-                        assets/images/sea2-1280w.webp 1280w,
-                        assets/images/sea2-960w.webp 960w,
-                        assets/images/sea2-640w.webp 640w
+                      data-srcset="
+                        assets/images/sea2-400.webp 400w,
+                        assets/images/sea2-800.webp 800w,
+                        assets/images/sea2-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/sea2.jpg" alt="Container vessel at sea for international freight" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/sea2-800.webp" alt="Container vessel at sea for international freight" loading="lazy" width="800" height="450" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="2">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/sea3-1920w.webp 1920w,
-                        assets/images/sea3-1280w.webp 1280w,
-                        assets/images/sea3-960w.webp 960w,
-                        assets/images/sea3-640w.webp 640w
+                      data-srcset="
+                        assets/images/sea3-400.webp 400w,
+                        assets/images/sea3-800.webp 800w,
+                        assets/images/sea3-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/sea3.jpg" alt="Port operations with stacked shipping containers" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/sea3-800.webp" alt="Port operations with stacked shipping containers" loading="lazy" width="800" height="450" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
               </div>
 
               <div class="slider-nav">
-                <button class="s-prev" aria-label="Previous image" onclick="event.preventDefault(); moveSlide(this, -1)">❮</button>
-                <button class="s-next" aria-label="Next image" onclick="event.preventDefault(); moveSlide(this, 1)">❯</button>
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
               </div>
 
               <div class="slider-dots">
-                <span class="dot active" onclick="event.preventDefault(); setSlide(this, 0)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 1)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 2)"></span>
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
+                <button class="dot" type="button" data-dot-index="2" aria-label="Slide 3"></button>
               </div>
             </div>
           </div>
@@ -341,60 +335,58 @@
           <div class="svc-card-img-wrap">
             <span class="svc-badge"><span class="bdot"></span> Active</span>
 
-            <div class="svc-slider">
+            <div class="svc-slider" data-slider>
               <div class="svc-slides">
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="0">
                   <picture>
                     <source
                       type="image/webp"
                       srcset="
-                        assets/images/land-1920w.webp 1920w,
-                        assets/images/land-1280w.webp 1280w,
-                        assets/images/land-960w.webp 960w,
-                        assets/images/land-640w.webp 640w
+                        assets/images/land-400.webp 400w,
+                        assets/images/land-800.webp 800w,
+                        assets/images/land-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/land.jpg" alt="Land freight truck crossing Jordan-Saudi Arabia border on GCC highway" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" src="assets/images/land-800.webp" alt="Land freight truck crossing Jordan-Saudi Arabia border on GCC highway" loading="lazy" width="800" height="450" decoding="async">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="1">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/land2-1280w.webp 1280w,
-                        assets/images/land2-960w.webp 960w,
-                        assets/images/land2-640w.webp 640w
+                      data-srcset="
+                        assets/images/land2-400.webp 400w,
+                        assets/images/land2-800.webp 800w,
+                        assets/images/land2-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/land2.jpg" alt="Fleet of trucks prepared for regional land freight" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/land2-800.webp" alt="Fleet of trucks prepared for regional land freight" loading="lazy" width="800" height="450" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="2">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/land3-1920w.webp 1920w,
-                        assets/images/land3-1280w.webp 1280w,
-                        assets/images/land3-960w.webp 960w,
-                        assets/images/land3-640w.webp 640w
+                      data-srcset="
+                        assets/images/land3-400.webp 400w,
+                        assets/images/land3-800.webp 800w,
+                        assets/images/land3-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/land3.jpg" alt="Truck driving along GCC logistics corridor at sunset" loading="lazy" width="600" height="400" decoding="async">
+                    <img class="svc-card-img" data-src="assets/images/land3-800.webp" alt="Truck driving along GCC logistics corridor at sunset" loading="lazy" width="800" height="450" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
               </div>
 
               <div class="slider-nav">
-                <button class="s-prev" aria-label="Previous image" onclick="event.preventDefault(); moveSlide(this, -1)">❮</button>
-                <button class="s-next" aria-label="Next image" onclick="event.preventDefault(); moveSlide(this, 1)">❯</button>
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
               </div>
 
               <div class="slider-dots">
-                <span class="dot active" onclick="event.preventDefault(); setSlide(this, 0)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 1)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 2)"></span>
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
+                <button class="dot" type="button" data-dot-index="2" aria-label="Slide 3"></button>
               </div>
             </div>
           </div>
@@ -415,46 +407,43 @@
           <div class="svc-card-img-wrap">
             <span class="svc-badge"><span class="bdot"></span> Active</span>
 
-            <div class="svc-slider">
+            <div class="svc-slider" data-slider>
               <div class="svc-slides">
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="0">
                   <picture>
                     <source
                       type="image/webp"
                       srcset="
-                        assets/images/customs-600w.webp 600w,
-                        assets/images/customs-400w.webp 400w,
-                        assets/images/customs.webp 900w
+                        assets/images/customs-400.webp 400w,
+                        assets/images/customs-800.webp 800w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/customs.jpg" alt="Customs clearance documentation and inspection at Jordanian port of entry" loading="lazy" width="600" height="400" decoding="async" onerror="this.style.background='#222120';this.style.minHeight='280px'">
+                    <img class="svc-card-img" src="assets/images/customs-800.webp" alt="Customs clearance documentation and inspection at Jordanian port of entry" loading="lazy" width="800" height="450" decoding="async" onerror="this.style.background='#222120';this.style.minHeight='280px'">
                   </picture>
                 </div>
-                <div class="svc-slide">
+                <div class="svc-slide" data-slide-index="1">
                   <picture>
                     <source
                       type="image/webp"
-                      srcset="
-                        assets/images/customs3-1920w.webp 1920w,
-                        assets/images/customs3-1280w.webp 1280w,
-                        assets/images/customs3-960w.webp 960w,
-                        assets/images/customs3-640w.webp 640w
+                      data-srcset="
+                        assets/images/customs3-400.webp 400w,
+                        assets/images/customs3-800.webp 800w,
+                        assets/images/customs3-1200.webp 1200w
                       "
                       sizes="(min-width: 1024px) 50vw, 100vw">
-                    <img class="svc-card-img" src="assets/images/customs3.jpg" alt="Customs documentation and tariff classification for Jordan imports" loading="lazy" width="600" height="400" decoding="async" onerror="this.style.background='#222120';this.style.minHeight='280px'">
+                    <img class="svc-card-img" data-src="assets/images/customs3-800.webp" alt="Customs documentation and tariff classification for Jordan imports" loading="lazy" width="800" height="450" decoding="async" onerror="this.style.background='#222120';this.style.minHeight='280px'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
                   </picture>
                 </div>
               </div>
 
               <div class="slider-nav">
-                <button class="s-prev" aria-label="Previous image" onclick="event.preventDefault(); moveSlide(this, -1)">❮</button>
-                <button class="s-next" aria-label="Next image" onclick="event.preventDefault(); moveSlide(this, 1)">❯</button>
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
               </div>
 
               <div class="slider-dots">
-                <span class="dot active" onclick="event.preventDefault(); setSlide(this, 0)"></span>
-                <span class="dot" onclick="event.preventDefault(); setSlide(this, 1)"></span>
-          
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
               </div>
 
             </div>

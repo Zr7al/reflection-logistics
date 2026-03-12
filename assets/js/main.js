@@ -685,7 +685,7 @@ document.addEventListener('componentsLoaded', () => {
       initCareers()
       initCVUpload()
       initProjectsFilter()
-      initServiceSliderAutoplay()
+      initServiceSliders()
       initPageTransitions()
       initParallax()
     } catch (_) { /* fail-soft for older browsers */ }
@@ -696,85 +696,75 @@ document.addEventListener('componentsLoaded', () => {
   } else {
     setTimeout(runNonCritical, 0)
   }
+
 })
 
 })()
 
-function scrollToSlide(slider, index) {
-  if (!slider) return;
-  const track = slider.querySelector('.svc-slides');
-  if (!track) return;
-  const slides = track.querySelectorAll('.svc-slide');
+function ensureSliderImageLoaded(slide) {
+  if (!slide || slide._loaded) return;
+  const img = slide.querySelector('img[data-src]');
+  const source = slide.querySelector('source[data-srcset]');
+  if (source && !source.srcset && source.dataset.srcset) {
+    source.srcset = source.dataset.srcset;
+  }
+  if (img && img.dataset.src && img.src.indexOf('data:image') === 0) {
+    img.src = img.dataset.src;
+  }
+  slide._loaded = true;
+}
+
+function currentServiceSlideIndex(slider) {
+  const dots = slider.querySelectorAll('.dot');
+  const idx = Array.from(dots).findIndex(dot => dot.classList.contains('active'));
+  return idx < 0 ? 0 : idx;
+}
+
+function goToServiceSlide(slider, index) {
+  const slides = slider.querySelectorAll('.svc-slide');
   const dots = slider.querySelectorAll('.dot');
   const total = slides.length;
   if (!total) return;
 
-  const normalized = (index + total) % total;
-  const isRTL = document.documentElement.dir === 'rtl';
-  const slideWidth = track.clientWidth || 0;
-  let left = slideWidth * normalized;
+  const next = (index + total) % total;
 
-  if (isRTL) {
-    left = -left;
-  }
+  slides.forEach((slide, i) => {
+    slide.style.display = i === next ? 'block' : 'none';
+  });
 
-  track.scrollTo({ left, behavior: 'smooth' });
-  dots.forEach((d, i) => d.classList.toggle('active', i === normalized));
-  slider.dataset.currentIndex = String(normalized);
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === next);
+  });
+
+  ensureSliderImageLoaded(slides[next]);
 }
 
-window.moveSlide = (btn, direction) => {
-  const slider = btn.closest('.svc-slider');
-  if (!slider) return;
-  const dots = slider.querySelectorAll('.dot');
-  const total = dots.length;
-  const isRTL = document.documentElement.dir === 'rtl';
-  const dirFactor = isRTL ? -1 : 1;
-
-  let current = Array.from(dots).findIndex(dot => dot.classList.contains('active'));
-  current = (current + dirFactor * direction + total) % total;
-  
-  updateSliderUI(slider, current);
-};
-
-window.setSlide = (dot, index) => {
-  const slider = dot.closest('.svc-slider');
-  if (!slider) return;
-  updateSliderUI(slider, index);
-};
-
-function updateSliderUI(slider, index) {
-  scrollToSlide(slider, index);
-}
-
-// Auto-advance service sliders with smooth transitions
-function initServiceSliderAutoplay() {
-  const sliders = document.querySelectorAll('.svc-slider');
-  const INTERVAL = 6000; // 6 seconds
-
+function initServiceSliders() {
+  const sliders = document.querySelectorAll('.svc-slider[data-slider]');
   sliders.forEach(slider => {
-    const advance = () => {
-      if (slider._pause) return;
+    const slides = slider.querySelectorAll('.svc-slide');
+    if (!slides.length) return;
 
-      const dots = slider.querySelectorAll('.dot');
-      if (!dots.length) return;
+    ensureSliderImageLoaded(slides[0]);
+    goToServiceSlide(slider, 0);
 
-      let current = Array.from(dots).findIndex(dot => dot.classList.contains('active'));
-      if (current < 0) current = 0;
+    const prev = slider.querySelector('.s-prev');
+    const next = slider.querySelector('.s-next');
+    const dots = slider.querySelectorAll('.dot');
 
-      const next = (current + 1) % dots.length;
-      updateSliderUI(slider, next);
-    };
-
-    let timer = setInterval(advance, INTERVAL);
-
-    // Pause on hover
-    slider.addEventListener('mouseenter', () => {
-      slider._pause = true;
+    prev && prev.addEventListener('click', () => {
+      goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
     });
 
-    slider.addEventListener('mouseleave', () => {
-      slider._pause = false;
+    next && next.addEventListener('click', () => {
+      goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.dataset.dotIndex || '0', 10);
+        goToServiceSlide(slider, idx);
+      });
     });
   });
 }
