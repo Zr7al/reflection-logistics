@@ -1,0 +1,10 @@
+# Reflection Logistics — Freight & Logistics Services in Jordan
+# https://reflectionlogistics.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://reflectionlogistics.com/sitemap.xml
+
+# Crawl-delay is non-standard; most bots ignore it. Omitted for better indexing.

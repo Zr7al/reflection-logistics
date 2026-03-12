@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://reflectionlogistics.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/about.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/about.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/services.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/services.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/projects.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/projects.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=1</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=3</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/project-detail.html?id=6</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/contact.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/contact.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://reflectionlogistics.com/careers.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://reflectionlogistics.com/careers.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://reflectionlogistics.com/careers.html?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://reflectionlogistics.com/careers.html"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
