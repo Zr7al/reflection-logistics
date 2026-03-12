@@ -106,7 +106,7 @@
   "field_msgph": "Describe your shipment, cargo type, origin/destination, timeline, or any other details...",
   "field_from": "From Date",
   "field_to": "To Date",
-  "acct_banner": "<strong>Account Statement (Kashf Hisab)</strong> — Please specify the date range you need the statement for. Our accounting team will prepare the report accordingly.",
+  "acct_banner": "<strong>Document Date Range</strong> — Please specify the date range for any statement or document you need. Our team will prepare it for you accordingly.",
   "submit_btn": "Send Message",
   "sending": "Sending...",
   "success_h": "Message Sent.",
