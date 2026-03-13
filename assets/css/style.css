@@ -1691,10 +1691,14 @@ html[lang="ar"] {
   line-height: 1.9;
   font-variant-numeric: lining-nums;
   word-spacing: 0;
-  text-rendering: auto; /* Fix for some browsers splitting Arabic letters */
+  text-rendering: optimizeLegibility;
 }
-html[lang="ar"] * {
-  letter-spacing: 0 !important; /* Critical: prevents splitting of connected Arabic letters */
+/* Force zero letter spacing on ALL elements in Arabic to prevent split letters */
+html[lang="ar"] *, 
+html[lang="ar"] *::before, 
+html[lang="ar"] *::after {
+  letter-spacing: 0 !important;
+  font-kerning: none !important;
 }
 html[lang="ar"] body {
   font-family: 'Tajawal', sans-serif;
@@ -2014,6 +2018,7 @@ body.page-exiting {
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none; /* Fix: prevents image from capturing swipe/scroll gestures */
 }
 
 /* ── Nav Buttons ── */
