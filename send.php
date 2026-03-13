@@ -35,7 +35,7 @@ if (isset($_SESSION['last_submit_time']) && (time() - $_SESSION['last_submit_tim
 
 // 4. HONEYPOT SPAM PROTECTION
 // Hidden field that only bots will see and fill.
-if (!empty($_POST['honeypot'])) {
+if (!empty($_POST['website'])) {
     // Return success to the bot to stop it, but don't process the email.
     echo json_encode(['success' => true, 'message' => 'Message processed (filtered).']);
     exit;

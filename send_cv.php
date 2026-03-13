@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // 1. HONEYPOT SECURITY CHECK
 // Bots typically fill all visible and hidden fields. If this is filled, it's a bot.
-if (!empty($_POST['honeypot'])) {
+if (!empty($_POST['website'])) {
     echo json_encode(['success' => true, 'message' => 'Filtered as spam.']);
     exit;
 }

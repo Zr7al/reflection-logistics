@@ -6,7 +6,7 @@
 .skip-link {
   position: absolute;
   top: 10px;
-  left: 50%;
+  inset-inline-start: 50%;
   transform: translateX(-50%);
   z-index: 10001;
   padding: 10px 20px;
@@ -66,8 +66,8 @@
    ============================================================ */
 .container {
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
+  margin-inline: auto;
+  padding-inline: 24px;
 }
 
 section {
@@ -110,7 +110,7 @@ img.img-loaded {
   display: none;
 }
 .form-error {
-  margin-bottom: 12px;
+  margin-block-bottom: 12px;
   font-size: 13px;
   color: #e03b3b;
   display: none;
@@ -181,7 +181,7 @@ img.img-loaded {
    NAV
    ============================================================ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  position: fixed; top: 0; inset-inline: 0; z-index: 999;
   display: flex; align-items: center; justify-content: space-between;
   padding-inline: 60px;
   height: 76px;
@@ -219,11 +219,11 @@ nav.nav-scrolled {
   content: '';
   position: absolute; bottom: 4px; inset-inline: 14px;
   height: 1px; background: var(--red);
-  transform: scaleX(0); transform-origin: right;
+  transform: scaleX(0); transform-origin: inline-end;
   transition: transform 0.25s ease;
 }
 .nav-links a:hover { color: #1a1918; background: #f5f0eb; }
-.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: inline-start; }
 .nav-links a.active { color: #1a1918; }
 .nav-links a.active::before {
   content: '';
@@ -289,7 +289,7 @@ nav.nav-scrolled {
 /* ============================================================
    SHARED SECTION EYEBROW
    ============================================================ */
-.section-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.section-eyebrow { display: flex; align-items: center; gap: 12px; margin-block-bottom: 14px; }
 .section-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--red); flex-shrink: 0; }
 .section-eyebrow span { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
 
@@ -323,7 +323,7 @@ nav.nav-scrolled {
   display: none;
   color: var(--red);
   font-size: 14px;
-  margin-top: 14px;
+  margin-block-top: 14px;
   padding: 12px 16px;
   background: rgba(200,57,26,0.08);
   border-inline-start: 3px solid var(--red);
@@ -395,11 +395,12 @@ nav.nav-scrolled {
 
 .hero-content {
   position: relative; z-index: 2;
-  padding: 0 60px 64px;
+  padding-block: 0 64px;
+  padding-inline: 60px;
   max-width: 900px;
 }
 .hero-eyebrow {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px; margin-block-bottom: 20px;
   opacity: 0; animation: fade-up 0.7s 0.1s ease forwards;
 }
 .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--red); flex-shrink: 0; }
@@ -410,7 +411,7 @@ nav.nav-scrolled {
   line-height: 0.9;
   letter-spacing: 2px;
   color: var(--white);
-  margin-bottom: 22px;
+  margin-block-bottom: 22px;
   opacity: 0;
   animation: fade-up 0.75s 0.2s ease forwards;
 }
@@ -421,9 +422,10 @@ nav.nav-scrolled {
   opacity: 0; animation: fade-up 0.75s 0.32s ease forwards;
 }
 .hero-bottom {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  position: absolute; bottom: 0; inset-inline: 0; z-index: 3;
   display: flex; justify-content: flex-end; align-items: center;
-  padding: 0 60px 28px;
+  padding-block: 0 28px;
+  padding-inline: 60px;
 }
 .scroll-hint {
   display: flex; align-items: center; gap: 10px;
@@ -435,7 +437,7 @@ nav.nav-scrolled {
 /* ============================================================
    TICKER
    ============================================================ */
-.ticker-wrap { overflow: hidden; background: var(--red); padding: 11px 0; }
+.ticker-wrap { overflow: hidden; background: var(--red); padding-block: 11px 0; }
 .ticker-inner {
   display: flex; flex-wrap: nowrap;
   width: max-content;
@@ -447,9 +449,9 @@ nav.nav-scrolled {
 .ticker-track span {
   white-space: nowrap; font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.9); padding: 0 36px;
+  color: rgba(255,255,255,0.9); padding-inline: 36px;
 }
-.ticker-track span.sep { color: rgba(255,255,255,0.35); padding: 0 4px; font-size: 16px; }
+.ticker-track span.sep { color: rgba(255,255,255,0.35); padding-inline: 4px; font-size: 16px; }
 
 /* ============================================================
    ABOUT
@@ -457,35 +459,35 @@ nav.nav-scrolled {
 .about-wrap { background: var(--black2); border-bottom: 1px solid var(--border); }
 .about {
   display: grid; grid-template-columns: 1fr 1fr; gap: 70px;
-  align-items: center; max-width: 1280px; margin: 0 auto; padding: 80px 60px;
+  align-items: center; max-width: 1280px; margin-inline: auto; padding-block: 80px; padding-inline: 60px;
 }
 .about h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(34px, 4.5vw, 52px); line-height: 1; letter-spacing: 1.5px; margin-bottom: 18px;
+  font-size: clamp(34px, 4.5vw, 52px); line-height: 1; letter-spacing: 1.5px; margin-block-bottom: 18px;
 }
-.about p { color: var(--muted); font-size: 15px; line-height: 1.85; margin-bottom: 14px; }
+.about p { color: var(--muted); font-size: 15px; line-height: 1.85; margin-block-bottom: 14px; }
 .read-more {
   display: inline-flex; align-items: center; gap: 8px;
   color: var(--red); text-decoration: none;
   font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
   font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
-  margin-top: 16px; transition: gap 0.2s;
+  margin-block-top: 16px; transition: gap 0.2s;
 }
 .read-more svg { transition: transform 0.25s; flex-shrink: 0; }
 .read-more:hover { gap: 14px; }
 .read-more:hover svg { transform: translateX(4px); }
 
-.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-block-top: 32px; }
 .astat {
   background: var(--black3); border: 1px solid var(--border);
   /* FIX: use logical border so RTL works without override */
   border-inline-start: 3px solid var(--red);
-  border-radius: 6px; padding: 18px 20px;
+  border-radius: 6px; padding-block: 18px; padding-inline: 20px;
   transition: box-shadow 0.3s, transform 0.3s;
 }
 .astat:hover { box-shadow: var(--glow); transform: translateY(-2px); }
 .astat-num { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--red); line-height: 1; }
-.astat-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.astat-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-block-top: 4px; }
 
 .about-imgs { display: grid; grid-template-rows: 1fr 1fr; gap: 14px; height: 500px; }
 .about-imgs img {
@@ -523,7 +525,7 @@ nav.nav-scrolled {
   will-change: transform;
 }
 .scard::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  content: ''; position: absolute; top: 0; inset-inline: 0; height: 3px;
   background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
 }
 .scard:hover { transform: translateY(-4px); border-color: var(--border2); box-shadow: var(--glow); }
@@ -1519,7 +1521,7 @@ html[lang="ar"] .trust-item-label {
 
   .nav-links {
     display: flex; flex-direction: column;
-    position: fixed; top: 76px; left: 0; right: 0;
+    position: fixed; top: 76px; inset-inline: 0;
     background: #ffffff; border-bottom: 3px solid var(--red);
     padding: 0 20px; gap: 0;
     max-height: 0; overflow: hidden;
@@ -2037,7 +2039,7 @@ body.page-exiting {
 .slider-dots {
   position: absolute;
   bottom: 15px;
-  left: 50%;
+  inset-inline-start: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
