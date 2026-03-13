@@ -1691,6 +1691,10 @@ html[lang="ar"] {
   line-height: 1.9;
   font-variant-numeric: lining-nums;
   word-spacing: 0;
+  text-rendering: auto; /* Fix for some browsers splitting Arabic letters */
+}
+html[lang="ar"] * {
+  letter-spacing: 0 !important; /* Critical: prevents splitting of connected Arabic letters */
 }
 html[lang="ar"] body {
   font-family: 'Tajawal', sans-serif;

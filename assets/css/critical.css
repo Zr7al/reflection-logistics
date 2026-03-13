@@ -3,6 +3,9 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white)}
+/* Arabic font and letter-spacing reset for split letters fix */
+html[lang="ar"] { font-family: 'Tajawal', sans-serif; text-rendering: auto; }
+html[lang="ar"] * { letter-spacing: 0 !important; }
 [data-lang-ready="false"] [data-i18n]{visibility:hidden}
 .hero .reveal{opacity:1;transform:none}
 @keyframes fade-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
