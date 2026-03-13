@@ -411,29 +411,46 @@ const validateField = field => {
 CV VALIDATION & DRAG DROP
 ───────────────────────────── */
 
+/**
+ * Validates a CV file based on extension and size.
+ * Uses extension-first approach for better cross-browser reliability.
+ */
 const validateCVFile = (file) => {
   if (!file) return { valid: false };
-  if (file.size > 5 * 1024 * 1024) return { valid: false, message: 'File too large — max 5MB' };
 
-  const allowedMimes = [
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  ];
-  const isAllowedMime = allowedMimes.includes(file.type);
-  const isAllowedExt  = /\.(pdf|doc|docx)$/i.test(file.name);
+  // 1. Extension Check
+  const allowedExts = ['pdf', 'doc', 'docx'];
+  const fileName = file.name || '';
+  const ext = fileName.split('.').pop().toLowerCase();
 
-  if (!isAllowedMime && !isAllowedExt) {
-    return { valid: false, message: 'Only PDF or Word documents accepted' };
+  if (!allowedExts.includes(ext)) {
+    return { 
+      valid: false, 
+      message: 'Invalid file type. Only PDF, DOC, or DOCX accepted.' 
+    };
   }
+
+  // 2. Size Check (5MB)
+  const MAX_SIZE = 5 * 1024 * 1024;
+  if (file.size > MAX_SIZE) {
+    return { 
+      valid: false, 
+      message: 'File too large. Maximum allowed size is 5MB.' 
+    };
+  }
+
   return { valid: true };
 };
 
+/**
+ * Updates the CV upload UI state and handles validation errors.
+ */
 const updateCVUploadUI = (file) => {
   const zone   = document.getElementById('cvZone');
   const nameEl = document.getElementById('cvFilename');
   const input  = document.getElementById('cvFile');
 
+  // Case: No file (e.g., cleared or modal opened)
   if (!file) {
     zone?.classList.remove('has-file');
     if (nameEl) nameEl.textContent = '';
@@ -441,49 +458,60 @@ const updateCVUploadUI = (file) => {
   }
 
   const result = validateCVFile(file);
+
   if (!result.valid) {
+    // Show error and reset everything
     showToast(result.message, 'error');
-    if (input) input.value = '';
+    if (input) input.value = ''; // Important: clear the input
     zone?.classList.remove('has-file');
     if (nameEl) nameEl.textContent = '';
     return false;
   }
 
+  // Success: Update UI
   zone?.classList.add('has-file');
   if (nameEl) nameEl.textContent = '✓ ' + file.name;
   return true;
 };
 
 const initCVUpload = () => {
-  const zone   = document.getElementById('cvZone')
-  const input  = document.getElementById('cvFile')
-  if (!zone || !input) return
+  const zone   = document.getElementById('cvZone');
+  const input  = document.getElementById('cvFile');
+  if (!zone || !input) return;
 
-  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over') })
-  zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'))
+  // Drag visual feedback
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'));
+  
+  // Handle Drop
   zone.addEventListener('drop', e => {
-    e.preventDefault()
-    zone.classList.remove('drag-over')
-    const file = e.dataTransfer.files[0]
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    
+    const file = e.dataTransfer.files[0];
     if (file) {
       const result = validateCVFile(file);
       if (result.valid) {
         try {
-          const dt = new DataTransfer()
-          dt.items.add(file)
-          input.files = dt.files
+          // Attempt to sync the dropped file to the file input
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          input.files = dt.files;
           updateCVUploadUI(file);
-        } catch (_) {
+        } catch (err) {
+          // If DataTransfer fails (rare), fall back to input selection
+          console.warn('DataTransfer not supported, falling back.');
           handleFileSelect(input);
         }
       } else {
         showToast(result.message, 'error');
       }
     }
-  })
+  });
 
-  input.addEventListener('change', () => updateCVUploadUI(input.files[0]))
-}
+  // Handle traditional selection
+  input.addEventListener('change', () => updateCVUploadUI(input.files[0]));
+};
 
 
 /* ─────────────────────────────
