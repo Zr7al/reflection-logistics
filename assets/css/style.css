@@ -449,9 +449,9 @@ nav.nav-scrolled {
 .ticker-track span {
   white-space: nowrap; font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.9); padding-inline: 36px;
+  color: #ffffff; padding-inline: 36px;
 }
-.ticker-track span.sep { color: rgba(255,255,255,0.35); padding-inline: 4px; font-size: 16px; }
+.ticker-track span.sep { color: rgba(255,255,255,0.75); padding-inline: 4px; font-size: 16px; }
 
 /* ============================================================
    ABOUT
@@ -602,7 +602,7 @@ nav.nav-scrolled {
   line-height: 0.92; letter-spacing: 2px;
   color: var(--white); margin-top: 14px;
 }
-.index-prefooter-left h2 em { font-style: normal; color: var(--red); }
+.index-prefooter-left h2 em { font-style: normal; color: #ff6b4a; }
 .index-prefooter-right { display: flex; flex-direction: column; gap: 24px; }
 .index-prefooter-right p { color: var(--muted); font-size: 15px; line-height: 1.85; }
 .index-prefooter-btn {
@@ -662,9 +662,9 @@ footer {
   background: #ffffff;
   border-top: 1px solid #e8e3de;
 }
-.footer-bottom p { color: #8a8380; font-size: 13px; }
+.footer-bottom p { color: #5a5652; font-size: 13px; }
 .footer-bottom-links { display: flex; gap: 24px; flex-wrap: wrap; }
-.footer-bottom-links a { color: #8a8380; font-size: 13px; text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a { color: #5a5652; font-size: 13px; text-decoration: none; transition: color 0.2s; }
 .footer-bottom-links a:hover { color: var(--red); }
 
 /* ============================================================

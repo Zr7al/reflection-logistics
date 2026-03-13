@@ -58,7 +58,7 @@
   <div class="pd-hero">
   <div class="pd-hero-img-wrap">
     <img id="pdHeroImg" class="pd-hero-img" src="assets/images/sea.webp" alt="Sea freight project: Aqaba to Rotterdam container shipment" width="1400" height="600"
-      onerror="this.style.background='#1a1918';this.style.minHeight='400px'">
+      onerror="this.style.background='#1a1918';this.style.minHeight='400px'" loading="lazy" decoding="async">
     <div class="pd-hero-img-overlay"></div>
     <div class="pd-hero-content-abs">
       <div class="pd-service-badge" id="pdBadge">
@@ -422,13 +422,13 @@ function renderOthers(currentId) {
     return `
       <a href="project-detail.html?id=${id}" class="pd-other-card">
         <div class="pd-other-card-img-wrap">
-          <img class="pd-other-card-img" src="${p.img}" alt="${badge} project: ${p.origin} to ${p.dest}" loading="lazy" width="500" height="280">
+          <img class="pd-other-card-img" src="${p.img}" alt="${badge} project: ${p.origin} to ${p.dest}" loading="lazy" width="500" height="280" decoding="async">
         </div>
         <div class="pd-other-card-body">
           <div class="pd-other-card-tag">${badge}</div>
           <div class="pd-other-card-title">${title}</div>
           <span class="pd-other-card-cta">
-            <span data-i18n="proj_view">View Project</span>
+            <span data-i18n="proj_view" aria-hidden="true">View Project</span><span class="sr-only"> Details</span>
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
