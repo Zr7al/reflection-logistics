@@ -705,6 +705,18 @@ PAGE TRANSITIONS
 ───────────────────────────── */
 
 const initPageTransitions = () => {
+  // Clear exiting class if navigating back (safari/chrome cache)
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+      document.body.classList.remove('page-exiting');
+    }
+  });
+
+  // Handle browser back/forward buttons immediately
+  window.addEventListener('popstate', () => {
+    document.body.classList.remove('page-exiting');
+  });
+
   document.addEventListener('click', e => {
     if (e.defaultPrevented) return
     const a = e.target.closest('a')
