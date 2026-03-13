@@ -1853,7 +1853,9 @@ html[dir="rtl"] .wa-float { right: auto; left: 28px; }
 
 /* ── UI label font overrides ── */
 html[lang="ar"] .section-eyebrow span,
-html[lang="ar"] .hero-eyebrow span   { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .hero-eyebrow span,
+html[lang="ar"] .svc-section-label span,
+html[lang="ar"] .svc-badge { font-family: 'Tajawal', sans-serif; letter-spacing: 0 !important; text-transform: none; }
 html[lang="ar"] .scroll-hint         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .astat-label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .read-more,
