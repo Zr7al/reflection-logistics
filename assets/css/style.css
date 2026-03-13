@@ -1700,6 +1700,13 @@ html[lang="ar"] *::after {
   letter-spacing: 0 !important;
   font-kerning: none !important;
 }
+/* Fix for connected letters being cut in flex containers on mobile */
+html[lang="ar"] .svc-section-label span,
+html[lang="ar"] .section-eyebrow span,
+html[lang="ar"] .hero-eyebrow span {
+  display: inline-block !important;
+  letter-spacing: normal !important;
+}
 html[lang="ar"] body {
   font-family: 'Tajawal', sans-serif;
   direction: rtl;
