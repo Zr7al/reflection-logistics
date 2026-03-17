@@ -1260,7 +1260,7 @@ margin-bottom:6px;
 
 /* Force Arabic font for the small labels below the badge */
 html[lang="ar"] .trust-item-label {
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-size: 11px;
   letter-spacing: 0;
 }
@@ -1691,7 +1691,7 @@ html[dir="rtl"] { overflow-x: clip; }
 
 /* ── Typography ── */
 html[lang="ar"] {
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Cairo', sans-serif;
   line-height: 1.9;
   font-variant-numeric: lining-nums;
   word-spacing: 0;
@@ -1713,7 +1713,7 @@ html[lang="ar"] .hero-eyebrow span {
   white-space: nowrap !important;
 }
 html[lang="ar"] body {
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Cairo', sans-serif;
   direction: rtl;
   text-align: right;
 }
@@ -1770,7 +1770,7 @@ html[dir="rtl"] .reveal.visible { transform: translateY(0) translateX(0); }
 
 /* Icon slide — mirror in RTL (icons slide toward reading direction) */
 
-/* Headings — Tajawal only for consistent Arabic stroke style */
+/* Headings — Cairo for consistent Arabic stroke style */
 html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4,
 html[lang="ar"] .hero h1, html[lang="ar"] .page-hero h1,
 html[lang="ar"] .about h2, html[lang="ar"] .section-head h2,
@@ -1784,13 +1784,13 @@ html[lang="ar"] .coming-overlay-tag, html[lang="ar"] .svc-cta-strip h2,
 html[lang="ar"] .why-h2, html[lang="ar"] .who-h2,
 html[lang="ar"] .svc-strip-h2, html[lang="ar"] .reach-h2,
 html[lang="ar"] .about-cta h2, html[lang="ar"] .stat-num {
-  font-family: 'Tajawal', sans-serif;
-  font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
   letter-spacing: 0;
 }
 
 /* Hero and heading emphasis — stronger contrast for Arabic */
-html[lang="ar"] .hero h1              { line-height: 1.2; letter-spacing: 0; word-spacing: 2px; font-size: clamp(52px, 7vw, 88px); text-wrap: balance; }
+html[lang="ar"] .hero h1              { font-weight: 900; line-height: 1.1; letter-spacing: 0; word-spacing: 0; font-size: clamp(58px, 8vw, 100px); text-wrap: balance; }
 html[lang="ar"] .hero h1 em,
 html[lang="ar"] .page-hero h1 em,
 html[lang="ar"] .careers-hero h1 em,
@@ -1815,7 +1815,7 @@ html[lang="ar"] .about-cta h2         { line-height: 1.25; }
 
 /* Nav — balanced spacing and lighter weight for long Arabic labels */
 html[lang="ar"] .nav-links { gap: 32px; }
-html[lang="ar"] .nav-links a { font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0; }
+html[lang="ar"] .nav-links a { font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 500; letter-spacing: 0; }
 html[lang="ar"] #langToggle  { font-family: 'Barlow Condensed', sans-serif; }
 
 /* Page hero decorative stripes — absolute-positioned, physical props don't auto-flip */
@@ -1824,7 +1824,7 @@ html[dir="rtl"] .page-hero::after  { right: auto; left: 60px; }
 
 /* Ticker */
 html[lang="ar"] .ticker-inner      { animation-direction: reverse; }
-html[lang="ar"] .ticker-track span { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .ticker-track span { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
 
 /* Buttons — browser auto-mirrors flex row direction; SVGs don't flip, so flip manually */
 html[lang="ar"] .read-more svg,
@@ -1871,30 +1871,30 @@ html[dir="rtl"] .wa-float { right: auto; left: 28px; }
 html[lang="ar"] .section-eyebrow span,
 html[lang="ar"] .hero-eyebrow span,
 html[lang="ar"] .svc-section-label span,
-html[lang="ar"] .svc-badge { font-family: 'Tajawal', sans-serif; letter-spacing: 0 !important; text-transform: none; }
-html[lang="ar"] .scroll-hint         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
-html[lang="ar"] .astat-label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .svc-badge { font-family: 'Cairo', sans-serif; letter-spacing: 0 !important; text-transform: none; }
+html[lang="ar"] .scroll-hint         { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .astat-label         { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .read-more,
 html[lang="ar"] .scard-btn,
 html[lang="ar"] .index-prefooter-btn,
 html[lang="ar"] .svc-cta-strip-btn,
 html[lang="ar"] .apply-btn,
 html[lang="ar"] .careers-cta-link,
-html[lang="ar"] .svc-cta:not(.disabled) { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
-html[lang="ar"] .svc-badge            { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .svc-cta:not(.disabled) { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .svc-badge            { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .field label,
-html[lang="ar"] .mfield label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .con-form-heading     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
+html[lang="ar"] .mfield label         { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
+html[lang="ar"] .con-form-heading     { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
 html[lang="ar"] .trust-label,
-html[lang="ar"] .trust-item-label     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .trust-item-label     { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .jobs-count,
 html[lang="ar"] .jobs-table-head,
-html[lang="ar"] .job-dept             { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .job-dept             { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .modal-submit,
-html[lang="ar"] .submit-btn           { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
-html[lang="ar"] .sdb-label            { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 13px; }
-html[lang="ar"] .sdb-text-label       { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .fcol h4              { font-family: 'Tajawal', sans-serif; font-weight: 700; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .submit-btn           { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .sdb-label            { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 13px; }
+html[lang="ar"] .sdb-text-label       { font-family: 'Cairo', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
+html[lang="ar"] .fcol h4              { font-family: 'Cairo', sans-serif; font-weight: 700; letter-spacing: 0; text-transform: none; }
 
 /* ── Arabic section spacing and rhythm ── */
 html[lang="ar"] .section-head         { margin-bottom: 60px; }
@@ -1932,13 +1932,13 @@ html[lang="ar"] .careers-hero p      { line-height: 1.9; }
   html[dir="rtl"] .nav-links         { align-items: stretch; }
 
   /* Arabic hero — comfortable scaling and padding on small screens */
-  html[lang="ar"] .hero h1          { font-size: clamp(44px, 11vw, 64px); }
+  html[lang="ar"] .hero h1          { font-size: clamp(48px, 12vw, 68px); font-weight: 900; }
   html[lang="ar"] .hero-content,
   html[lang="ar"] .hero-sub         { max-width: 100%; padding-inline: 20px; }
 }
 
 @media (max-width: 390px) {
-  html[lang="ar"] .hero h1 { font-size: clamp(38px, 12vw, 52px); }
+  html[lang="ar"] .hero h1 { font-size: clamp(40px, 13vw, 54px); font-weight: 900; }
 }
 
 #langToggle {
