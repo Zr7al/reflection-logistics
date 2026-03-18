@@ -380,7 +380,8 @@ nav.nav-scrolled {
 .hero {
   /* Match original cinematic hero: fills almost full viewport,
      content anchored near the bottom with no extra top padding. */
-  min-height: 92vh;
+  min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   display: flex;
   align-items: flex-end;
