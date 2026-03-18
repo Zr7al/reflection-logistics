@@ -11,6 +11,7 @@ CONFIG
 ───────────────────────────── */
 
 const FETCH_TIMEOUT = 10000
+const clickDelegates = []
 
 const fetchWithTimeout = (url, options = {}) => {
   const controller = new AbortController()
@@ -28,22 +29,12 @@ const initToasts = () => {
   if (document.getElementById('toast-container')) return
   const container = document.createElement('div')
   container.id = 'toast-container'
-  Object.assign(container.style, {
-    position: 'fixed',
-    bottom: '88px',
-    right: '28px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    zIndex: '10000',
-    pointerEvents: 'none'
-  })
   document.body.appendChild(container)
 }
 
 const isRTL = () => document.documentElement.dir === 'rtl'
 
-window.showToast = (msg, type = 'info', duration = 4000) => {
+function showToast(msg, type = 'info', duration = 4000) {
   const container = document.getElementById('toast-container')
   if (!container) return
 
@@ -56,23 +47,10 @@ window.showToast = (msg, type = 'info', duration = 4000) => {
   const slideIn = isRTL() ? '-20px' : '20px'
 
   const toast = document.createElement('div')
-  Object.assign(toast.style, {
-    background: '#1a1918',
-    borderLeft: `3px solid ${border}`,
-    border: `1px solid rgba(255,255,255,0.08)`,
-    borderLeftColor: border,
-    padding: '12px 16px',
-    color: '#f5f0eb',
-    fontSize: '13px',
-    borderRadius: '5px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
-    opacity: '0',
-    transform: `translateX(${slideIn})`,
-    transition: 'opacity .25s ease, transform .25s ease',
-    pointerEvents: 'all',
-    cursor: 'pointer',
-    maxWidth: '300px'
-  })
+  toast.className = 'rl-toast'
+  // Dynamic visual inputs (kept out of inline Object.assign for easier CSS override).
+  toast.style.setProperty('--toast-border', border)
+  toast.style.setProperty('--toast-slide-in', slideIn)
   toast.textContent = msg
   toast.addEventListener('click', () => removeToast(toast))
   container.appendChild(toast)
@@ -212,7 +190,7 @@ const initNav = () => {
     a.addEventListener('click', () => toggle(false))
   })
 
-  document.addEventListener('click', e => {
+  clickDelegates.push(e => {
     if (navLinks.classList.contains('open')
       && !navLinks.contains(e.target)
       && !hamburger.contains(e.target)) toggle(false)
@@ -262,12 +240,31 @@ const initCareers = () => {
   if (jobs && !jobs.querySelector('.job-item')) {
     jobs.innerHTML = `
       <div class="no-jobs reveal visible">
-        <h3>No Active Openings</h3>
-        <p>Send general applications to
-          <a href="mailto:careers@reflectionlogistics.com">careers@reflectionlogistics.com</a>
-        </p>
+        <h3 data-i18n="car_no_h">No Active Openings</h3>
+        <p data-i18n="car_no_p">Send general applications to <a href="mailto:INFO@REFLECTIONJO.COM">INFO@REFLECTIONJO.COM</a></p>
       </div>`
+    document.dispatchEvent(new CustomEvent('i18nApply'))
   }
+
+  document.querySelectorAll('.job-row').forEach(row => {
+    row.addEventListener('click', () => toggleJob(row))
+    row.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleJob(row) }
+    })
+  })
+
+  document.querySelectorAll('.apply-btn[data-job-title]').forEach(btn => {
+    btn.addEventListener('click', () => openApplyModal(btn.dataset.jobTitle))
+  })
+
+  const modal = document.getElementById('applyModal')
+  if (modal) {
+    modal.querySelector('.modal-close')?.addEventListener('click', closeApplyModal)
+    modal.addEventListener('click', e => { if (e.target === modal) closeApplyModal() })
+    document.getElementById('modalForm')?.addEventListener('submit', submitApplication)
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeApplyModal() })
 }
 
 
@@ -356,9 +353,12 @@ const initContactForm = () => {
         throw new Error(data.message || 'Server error')
       }
     } catch (err) {
-      const msg = err.message === 'Server error' ? 'Something went wrong. Please try again.' : 
-                 (err.name === 'AbortError' ? 'Request timed out. Check your connection.' : 'Network error. Please try again.')
-      
+      const msg = err.name === 'AbortError'
+        ? 'Request timed out. Check your connection.'
+        : (err.message && err.message !== 'Server error'
+            ? err.message
+            : 'Something went wrong. Please try again.')
+
       if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible') }
       if (label) label.textContent = orig
       if (btn) btn.disabled = false
@@ -499,9 +499,9 @@ const initCVUpload = () => {
           input.files = dt.files;
           updateCVUploadUI(file);
         } catch (err) {
-          // If DataTransfer fails (rare), fall back to input selection
+          // If DataTransfer fails (rare), fall back to updating UI only
           console.warn('DataTransfer not supported, falling back.');
-          handleFileSelect(input);
+          updateCVUploadUI(file);
         }
       } else {
         showToast(result.message, 'error');
@@ -518,7 +518,7 @@ const initCVUpload = () => {
 JOB DRAWER
 ───────────────────────────── */
 
-window.toggleJob = row => {
+function toggleJob(row) {
   const item   = row.closest('.job-item')
   if (!item) return
   const isOpen = item.classList.contains('active')
@@ -541,7 +541,7 @@ APPLY MODAL
 
 let _currentJob = ''
 
-window.openApplyModal = title => {
+function openApplyModal(title) {
   const modal = document.getElementById('applyModal')
   if (!modal) return
   _currentJob = title
@@ -563,7 +563,7 @@ window.openApplyModal = title => {
   setTimeout(() => modal.querySelector('input, button')?.focus(), 60)
 }
 
-window.closeApplyModal = () => {
+function closeApplyModal() {
   const modal = document.getElementById('applyModal')
   if (!modal) return
   modal.classList.remove('visible')
@@ -572,19 +572,7 @@ window.closeApplyModal = () => {
   _currentJob = ''
 }
 
-document.addEventListener('click', e => {
-  const modal = document.getElementById('applyModal')
-  if (e.target === modal) window.closeApplyModal()
-})
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') window.closeApplyModal()
-})
-
-window.handleFileSelect = input => {
-  updateCVUploadUI(input?.files[0]);
-}
-
-window.submitApplication = async e => {
+async function submitApplication(e) {
   if (e) e.preventDefault()
 
   const btn     = document.getElementById('modalSubmitBtn')
@@ -644,8 +632,11 @@ window.submitApplication = async e => {
       throw new Error(data.message || 'Server error')
     }
   } catch (err) {
-    const msg = err.message === 'Server error' ? 'Something went wrong. Please try again.' : 
-               (err.name === 'AbortError' ? 'Request timed out. Check your connection.' : 'Network error. Please try again.')
+    const msg = err.name === 'AbortError'
+      ? 'Request timed out. Check your connection.'
+      : (err.message && err.message !== 'Server error'
+          ? err.message
+          : 'Something went wrong. Please try again.')
     if (errEl) { errEl.textContent = msg; errEl.classList.add('visible') }
     if (btn)   { btn.disabled = false; btn.textContent = 'Submit Application' }
     showToast(msg, 'error')
@@ -662,6 +653,44 @@ const initProjectsFilter = () => {
   const cards      = document.querySelectorAll('.proj-card')
   if (!filterBtns.length) return
 
+  const FADE_MS = 200
+  const animateCardVisibility = (card, shouldShow) => {
+    // Cancel any in-progress animation timers to avoid flicker.
+    if (card._filterTimer) clearTimeout(card._filterTimer)
+
+    const transition = `opacity ${FADE_MS}ms ease, transform ${FADE_MS}ms ease`
+    card.style.transition = transition
+    card.style.willChange = 'opacity, transform'
+
+    if (shouldShow) {
+      // Ensure the element participates in layout so we can animate.
+      card.style.display = ''
+      card.style.opacity = '0'
+      card.style.transform = 'scale(0.98)'
+      card.style.pointerEvents = ''
+
+      // Force layout so the transition reliably triggers.
+      void card.offsetHeight
+      requestAnimationFrame(() => {
+        card.style.opacity = '1'
+        card.style.transform = 'scale(1)'
+      })
+      return
+    }
+
+    // Animate out first, then remove from layout.
+    card.style.opacity = '0'
+    card.style.transform = 'scale(0.98)'
+    card.style.pointerEvents = 'none'
+    card._filterTimer = setTimeout(() => {
+      card.style.display = 'none'
+      // Reset inline styles so layout/CSS rules remain the source of truth.
+      card.style.opacity = ''
+      card.style.transform = ''
+      card.style.pointerEvents = ''
+    }, FADE_MS)
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'))
@@ -669,7 +698,7 @@ const initProjectsFilter = () => {
       const filter = btn.dataset.filter
       cards.forEach(card => {
         const show = filter === 'all' || card.dataset.category === filter
-        card.style.display = show ? '' : 'none'
+        animateCardVisibility(card, show)
       })
     })
   })
@@ -717,7 +746,7 @@ const initPageTransitions = () => {
     document.body.classList.remove('page-exiting');
   });
 
-  document.addEventListener('click', e => {
+  clickDelegates.push(e => {
     if (e.defaultPrevented) return
     const a = e.target.closest('a')
     if (!a) return
@@ -725,16 +754,19 @@ const initPageTransitions = () => {
     const href = a.getAttribute('href')
     if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return
     if (a.target === '_blank' || a.hasAttribute('download')) return
-    
+
     try {
       const url = new URL(href, location.origin)
       if (url.origin !== location.origin || url.pathname === location.pathname) return
     } catch (_) { return }
 
     e.preventDefault()
+    if (window.matchMedia('(hover: none)').matches) {
+      location.href = href
+      return
+    }
     document.body.classList.add('page-exiting')
-    // Wait for 220ms to match CSS opacity transition
-    setTimeout(() => { location.href = href }, 220)
+    setTimeout(() => { location.href = href }, 80)
   })
 }
 
@@ -748,6 +780,7 @@ document.addEventListener('componentsLoaded', () => {
   initImageLoading()
   initNav()
   initContactForm()
+  document.addEventListener('click', e => { for (const h of clickDelegates) h(e) })
 
   const runNonCritical = () => {
     try {
@@ -772,92 +805,128 @@ document.addEventListener('componentsLoaded', () => {
   }
 })
 
-})()
-
-/**
- * Service Slider logic — kept outside IIFE for easy call/reload
- */
-function ensureSliderImageLoaded(slide) {
-  if (!slide || slide._loaded) return;
-  const img = slide.querySelector('img[data-src]');
-  const source = slide.querySelector('source[data-srcset]');
-  if (source && !source.srcset && source.dataset.srcset) {
-    source.srcset = source.dataset.srcset;
+  function ensureSliderImageLoaded(slide) {
+    if (!slide || slide._loaded) return
+    const img = slide.querySelector('img[data-src]')
+    const source = slide.querySelector('source[data-srcset]')
+    if (source && !source.srcset && source.dataset.srcset) {
+      source.srcset = source.dataset.srcset
+    }
+    if (img && img.dataset.src && img.src.indexOf('data:image') === 0) {
+      img.src = img.dataset.src
+    }
+    slide._loaded = true
   }
-  if (img && img.dataset.src && img.src.indexOf('data:image') === 0) {
-    img.src = img.dataset.src;
+
+  function currentServiceSlideIndex(slider) {
+    const dots = slider.querySelectorAll('.dot')
+    const idx = Array.from(dots).findIndex(dot => dot.classList.contains('active'))
+    return idx < 0 ? 0 : idx
   }
-  slide._loaded = true;
-}
 
-function currentServiceSlideIndex(slider) {
-  const dots = slider.querySelectorAll('.dot');
-  const idx = Array.from(dots).findIndex(dot => dot.classList.contains('active'));
-  return idx < 0 ? 0 : idx;
-}
+  function goToServiceSlide(slider, index) {
+    const slides = slider.querySelectorAll('.svc-slide')
+    const dots = slider.querySelectorAll('.dot')
+    const total = slides.length
+    if (!total) return
 
-function goToServiceSlide(slider, index) {
-  const slides = slider.querySelectorAll('.svc-slide');
-  const dots = slider.querySelectorAll('.dot');
-  const total = slides.length;
-  if (!total) return;
+    const next = (index + total) % total
 
-  const next = (index + total) % total;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === next)
+    })
 
-  slides.forEach((slide, i) => {
-    slide.style.display = i === next ? 'block' : 'none';
-  });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === next)
+    })
 
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === next);
-  });
+    ensureSliderImageLoaded(slides[next])
+    // Pre-load the next slide image
+    ensureSliderImageLoaded(slides[(next + 1) % total])
+  }
 
-  ensureSliderImageLoaded(slides[next]);
-}
+  function initServiceSliders() {
+    const sliders = document.querySelectorAll('.svc-slider[data-slider]')
+    sliders.forEach(slider => {
+      if (slider.dataset.sliderInit === 'true') return
+      slider.dataset.sliderInit = 'true'
 
-function initServiceSliders() {
-  const sliders = document.querySelectorAll('.svc-slider[data-slider]');
-  sliders.forEach(slider => {
-    if (slider.dataset.sliderInit === 'true') return;
-    slider.dataset.sliderInit = 'true';
+      const slides = slider.querySelectorAll('.svc-slide')
+      if (!slides.length) return
 
-    const slides = slider.querySelectorAll('.svc-slide');
-    if (!slides.length) return;
+      ensureSliderImageLoaded(slides[0])
+      goToServiceSlide(slider, 0)
 
-    ensureSliderImageLoaded(slides[0]);
-    goToServiceSlide(slider, 0);
+      const prev = slider.querySelector('.s-prev')
+      const next = slider.querySelector('.s-next')
+      const dots = slider.querySelectorAll('.dot')
 
-    const prev = slider.querySelector('.s-prev');
-    const next = slider.querySelector('.s-next');
-    const dots = slider.querySelectorAll('.dot');
+      const AUTOPLAY_DELAY = 4500
+      let autoTimer = setInterval(() => {
+        goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1)
+      }, AUTOPLAY_DELAY)
 
-    prev?.addEventListener("click", (e) => {
-      e.preventDefault(); e.stopPropagation();
-      goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
-    });
-
-    next?.addEventListener("click", (e) => {
-      e.preventDefault(); e.stopPropagation();
-      goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
-    });
-
-    dots.forEach(dot => {
-      dot.addEventListener("click", (e) => {
-          e.preventDefault(); e.stopPropagation();
-          const idx = parseInt(dot.dataset.dotIndex || "0", 10);
-          goToServiceSlide(slider, idx);
-      });
-    });
-
-    slider.setAttribute('tabindex', '0');
-    slider.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1);
+      function resetAutoplay() {
+        clearInterval(autoTimer)
+        autoTimer = setInterval(() => {
+          goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1)
+        }, AUTOPLAY_DELAY)
       }
-    });
-  });
-}
+
+      // Pause autoplay on hover
+      slider.addEventListener('mouseenter', () => clearInterval(autoTimer))
+      slider.addEventListener('mouseleave', () => resetAutoplay())
+
+      prev?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1)
+        resetAutoplay()
+      })
+
+      next?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1)
+        resetAutoplay()
+      })
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          const idx = parseInt(dot.dataset.dotIndex || '0', 10)
+          goToServiceSlide(slider, idx)
+          resetAutoplay()
+        })
+      })
+
+      // Touch swipe support
+      let touchStartX = 0
+      slider.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX
+      }, { passive: true })
+      slider.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX
+        if (Math.abs(dx) > 40) {
+          goToServiceSlide(slider, currentServiceSlideIndex(slider) + (dx < 0 ? 1 : -1))
+          resetAutoplay()
+        }
+      }, { passive: true })
+
+      slider.setAttribute('tabindex', '0')
+      slider.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault()
+          goToServiceSlide(slider, currentServiceSlideIndex(slider) - 1)
+          resetAutoplay()
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault()
+          goToServiceSlide(slider, currentServiceSlideIndex(slider) + 1)
+          resetAutoplay()
+        }
+      })
+    })
+  }
+
+})()

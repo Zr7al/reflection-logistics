@@ -66,22 +66,15 @@ const ATTR_MAP = [
   { attr: 'data-i18n-alt', set: (el, v) => { el.setAttribute('alt', v); } }
 ];
 
-let nodeCache = null;
-
 function getT(key, lang) {
   const t = translations[lang];
   return (t && t[key]) || (translations.en && translations.en[key]) || '';
 }
 
 function applyTranslations(lang) {
-  if (!nodeCache) {
-    nodeCache = ATTR_MAP.map(({ attr }) => [...document.querySelectorAll('[' + attr + ']')]);
-  }
-
-  ATTR_MAP.forEach(({ attr, set }, i) => {
-    const nodes = nodeCache[i];
+  ATTR_MAP.forEach(({ attr, set }) => {
     const keyAttr = attr === 'data-i18n' ? 'i18n' : 'i18n' + attr.replace('data-i18n-', '').replace(/-([a-z])/g, (_, c) => c.toUpperCase()).replace(/^./, c => c.toUpperCase());
-    nodes.forEach(el => {
+    document.querySelectorAll('[' + attr + ']').forEach(el => {
       const key = el.dataset[keyAttr] ?? el.getAttribute(attr);
       if (!key) return;
       const value = getT(key, lang);
@@ -89,6 +82,11 @@ function applyTranslations(lang) {
     });
   });
 }
+
+document.addEventListener('i18nApply', () => {
+  const lang = document.documentElement.lang || DEFAULT_LANG;
+  applyTranslations(lang);
+});
 
 /* ── 5. MAIN ENTRY POINT ── */
 async function applyLang(lang) {
@@ -170,7 +168,6 @@ async function applyLang(lang) {
 
 /* ── 6. INIT (runs after nav/footer components loaded) ── */
 async function initI18n() {
-  nodeCache = null;
   const lang = resolveLang();
   await applyLang(lang);
 
