@@ -158,6 +158,7 @@ async function applyLang(lang) {
   }
 
   document.documentElement.dataset.langReady = 'true';
+  document.dispatchEvent(new CustomEvent('i18nDone'));
 
   if (typeof renderProject === 'function' && typeof getProjectId === 'function') {
     try {

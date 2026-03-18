@@ -64,16 +64,18 @@
 /* ── Map embed ── */
 .map-block {
   margin-top: 20px;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.32);
 }
+
 .map-block iframe {
   display: block;
   width: 100%;
-  height: 220px;
+  height: 320px;
   border: 0;
-  filter: grayscale(40%) invert(5%);
 }
 
 /* ── RTL fixes ── */

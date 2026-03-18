@@ -705,7 +705,7 @@ footer {
 }
 .footer-social-btn:hover { border-color: var(--red); color: var(--red); background: rgba(200,57,26,0.06); }
 .footer-social-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
-.fcol h4 {
+.fcol h3 {
   font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: #1a1918; margin-bottom: 16px;
@@ -1212,13 +1212,12 @@ margin-bottom:6px;
 
 /* Map */
 .map-block {
-  border-radius: 12px; overflow: hidden;
+  border-radius: 14px; overflow: hidden;
   border: 1px solid var(--border);
-  min-height: 220px;
+  min-height: 325px;
 }
 .map-block iframe {
-  display: block; width: 100%; height: 220px; border: 0;
-  filter: grayscale(40%) invert(5%);
+  display: block; width: 100%; height: 280px; border: 0;
 }
 
 /* Urgent strip */
@@ -1274,7 +1273,7 @@ margin-bottom:6px;
   .trust-label {
   text-align: center; font-size: 11px; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); margin-bottom: 28px;
+  color: rgba(255,255,255,0.6); margin-bottom: 28px;
 }
 .trust-logos { 
   display: flex; 
@@ -1321,7 +1320,7 @@ html[lang="ar"] .trust-item-label {
   letter-spacing: 0;
 }
 
-.trust-item-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.trust-item-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
 .trust-badge-ph { border-style: dashed !important; color: rgba(255,255,255,0.35) !important; }
 .trust-badge-ph svg { display: block; }
 .trust-item-ph { opacity: 0.28; cursor: default; pointer-events: none; }
@@ -1680,7 +1679,7 @@ html[lang="ar"] .trust-item-label {
   .footer-brand { grid-column: 1 / -1; }
   .footer-brand img { height: 72px; }
   .footer-brand p { max-width: 100%; font-size: 13px; }
-  .fcol h4 { font-size: 11px; margin-bottom: 12px; }
+  .fcol h3 { font-size: 11px; margin-bottom: 12px; }
   .fcol a { font-size: 13px; margin-bottom: 8px; }
   .footer-bottom { padding: 18px 20px; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
   .footer-bottom-links { justify-content: center; gap: 16px; flex-wrap: wrap; }
@@ -1889,7 +1888,7 @@ html[lang="ar"] .about-cta h2, html[lang="ar"] .stat-num {
 }
 
 /* Hero and heading emphasis — stronger contrast for Arabic */
-html[lang="ar"] .hero h1              { font-weight: 900; line-height: 1.0; letter-spacing: 0; word-spacing: 0; font-size: clamp(64px, 9vw, 112px); }
+html[lang="ar"] .hero h1              { font-weight: 900; line-height: 1.2; letter-spacing: 0; word-spacing: 0; font-size: clamp(38px, 4.8vw, 62px); }
 html[lang="ar"] .hero h1 em,
 html[lang="ar"] .page-hero h1 em,
 html[lang="ar"] .careers-hero h1 em,
@@ -1993,7 +1992,7 @@ html[lang="ar"] .modal-submit,
 html[lang="ar"] .submit-btn           { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .sdb-label            { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 13px; }
 html[lang="ar"] .sdb-text-label       { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .fcol h4              { font-family: 'Tajawal', sans-serif; font-weight: 700; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .fcol h3              { font-family: 'Tajawal', sans-serif; font-weight: 700; letter-spacing: 0; text-transform: none; }
 
 /* ── Arabic section spacing and rhythm ── */
 html[lang="ar"] .section-head         { margin-bottom: 60px; }
@@ -2031,13 +2030,13 @@ html[lang="ar"] .careers-hero p      { line-height: 1.9; }
   html[dir="rtl"] .nav-links         { align-items: stretch; }
 
   /* Arabic hero — comfortable scaling and padding on small screens */
-  html[lang="ar"] .hero h1          { font-size: clamp(48px, 12vw, 68px); font-weight: 900; }
+  html[lang="ar"] .hero h1          { font-size: clamp(32px, 9vw, 48px); font-weight: 900; line-height: 1.2; }
   html[lang="ar"] .hero-content,
   html[lang="ar"] .hero-sub         { max-width: 100%; padding-inline: 20px; }
 }
 
 @media (max-width: 390px) {
-  html[lang="ar"] .hero h1 { font-size: clamp(40px, 13vw, 54px); font-weight: 900; }
+  html[lang="ar"] .hero h1 { font-size: clamp(28px, 11vw, 42px); font-weight: 900; line-height: 1.2; }
 }
 
 #langToggle {
@@ -2071,14 +2070,8 @@ html[lang="ar"] p {
 }
 
 @keyframes waPulse {
-  0%, 12%, 100% {
-    transform: scale(1);
-    box-shadow: 0 4px 16px rgba(37,211,102,0.4);
-  }
-  6% {
-    transform: scale(1.05);
-    box-shadow: 0 6px 22px rgba(37,211,102,0.7);
-  }
+  0%, 12%, 100% { transform: scale(1); }
+  6% { transform: scale(1.05); }
 }
 
 /* ── Page transitions ── */

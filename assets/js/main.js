@@ -72,6 +72,15 @@ const removeToast = toast => {
   setTimeout(() => toast.remove(), 260)
 }
 
+const updateFooterYear = () => {
+  const year = String(new Date().getFullYear())
+  document.querySelectorAll('.js-footer-year').forEach(el => {
+    el.textContent = year
+  })
+}
+
+document.addEventListener('i18nDone', updateFooterYear)
+
 
 /* ─────────────────────────────
 IMAGE LOADING
@@ -241,7 +250,7 @@ const initCareers = () => {
     jobs.innerHTML = `
       <div class="no-jobs reveal visible">
         <h3 data-i18n="car_no_h">No Active Openings</h3>
-        <p data-i18n="car_no_p">Send general applications to <a href="mailto:INFO@REFLECTIONJO.COM">INFO@REFLECTIONJO.COM</a></p>
+        <p data-i18n="car_no_p">Send general applications to <a href="mailto:info@reflectionjo.com">info@reflectionjo.com</a></p>
       </div>`
     document.dispatchEvent(new CustomEvent('i18nApply'))
   }
@@ -736,7 +745,8 @@ PAGE TRANSITIONS
 const initPageTransitions = () => {
   // Clear exiting class if navigating back (safari/chrome cache)
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+    const navType = performance.getEntriesByType?.('navigation')?.[0]?.type
+    if (event.persisted || navType === 'back_forward') {
       document.body.classList.remove('page-exiting');
     }
   });
@@ -777,6 +787,7 @@ INIT
 
 document.addEventListener('componentsLoaded', () => {
   initToasts()
+  updateFooterYear()
   initImageLoading()
   initNav()
   initContactForm()
