@@ -468,7 +468,10 @@ nav.nav-scrolled {
 /* ============================================================
    TICKER
    ============================================================ */
-.ticker-wrap { overflow: hidden; background: var(--red); padding-block: 11px 0; }
+.ticker-wrap {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+  overflow: hidden; background: var(--red); padding-block: 10px;
+}
 .ticker-inner {
   display: flex; flex-wrap: nowrap;
   width: max-content;
@@ -716,7 +719,7 @@ footer {
 }
 .fcol a:hover { color: var(--red); }
 .footer-bottom {
-  max-width: 100%; padding: 22px 60px;
+  max-width: 100%; padding: 22px 60px 60px;
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
   background: #ffffff;
   border-top: 1px solid #e8e3de;
@@ -1245,7 +1248,7 @@ margin-bottom:6px;
 
 /* Floating WhatsApp */
 .wa-float {
-  position: fixed; bottom: 28px; right: 28px; z-index: 998;
+  position: fixed; bottom: 72px; right: 28px; z-index: 998;
   width: 56px; height: 56px;
   background: #25D366; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -1681,7 +1684,7 @@ html[lang="ar"] .trust-item-label {
   .footer-brand p { max-width: 100%; font-size: 13px; }
   .fcol h3 { font-size: 11px; margin-bottom: 12px; }
   .fcol a { font-size: 13px; margin-bottom: 8px; }
-  .footer-bottom { padding: 18px 20px; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .footer-bottom { padding: 18px 20px 56px; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
   .footer-bottom-links { justify-content: center; gap: 16px; flex-wrap: wrap; }
 
   .careers-hero { padding: 110px 20px 52px; }
@@ -1720,7 +1723,7 @@ html[lang="ar"] .trust-item-label {
   .index-prefooter-btn { width: 100%; justify-content: center; }
 
   /* wa-float below nav (999) and nav-links dropdown (998) on mobile */
-  .wa-float { bottom: 20px; right: 20px; width: 50px; height: 50px; z-index: 997; }
+  .wa-float { bottom: 60px; right: 20px; width: 50px; height: 50px; z-index: 997; }
   .wa-float svg { width: 24px; height: 24px; }
 }
 
@@ -1963,7 +1966,7 @@ html[dir="rtl"] .field select {
 }
 
 /* WhatsApp float — fixed positioned */
-html[dir="rtl"] .wa-float { right: auto; left: 28px; }
+html[dir="rtl"] .wa-float { right: auto; left: 28px; bottom: 72px; }
 
 /* ── UI label font overrides ── */
 html[lang="ar"] .section-eyebrow span,
@@ -2016,7 +2019,7 @@ html[lang="ar"] .careers-hero p      { line-height: 1.9; }
   html[dir="rtl"] .page-hero::after { left: 40px; }
   html[dir="rtl"] .con-form-col     { padding: 40px 0 36px; }
   html[dir="rtl"] .con-sidebar      { padding: 36px 0 0; }
-  html[dir="rtl"] .wa-float         { left: 20px; }
+  html[dir="rtl"] .wa-float         { left: 20px; bottom: 60px; }
   html[dir="rtl"] nav               { padding-inline: 20px; }
 
   /* Mobile RTL — fix column flex containers where align-items: flex-start
