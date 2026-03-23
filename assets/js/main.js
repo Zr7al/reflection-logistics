@@ -10,7 +10,7 @@
 CONFIG
 ───────────────────────────── */
 
-const FETCH_TIMEOUT = 10000
+const FETCH_TIMEOUT = 30000
 const clickDelegates = []
 
 const fetchWithTimeout = (url, options = {}) => {
