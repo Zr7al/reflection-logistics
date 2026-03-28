@@ -1261,70 +1261,116 @@ margin-bottom:6px;
 /* ============================================================
    TRUST / CERTIFICATIONS STRIP
    ============================================================ */
- .trust-strip {
-  padding: 44px 0 40px;
-  border-top: 1px solid var(--border);
-  background: var(--black);
+/* ── TRUST / CERTIFICATIONS STRIP ── */
+.trust-strip {
+  padding: 96px 0 104px;
+  background: #0d0d0e;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
 }
-  .trust-strip-inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding-inline: clamp(20px, 5vw, 80px);
-  }
-  .trust-label {
-  text-align: center; font-size: 11px; font-weight: 600;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.6); margin-bottom: 28px;
+.trust-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -5%, rgba(200,57,26,0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
-.trust-logos { 
-  display: flex; 
-  align-items: flex-start; 
-  justify-content: center; 
-  flex-wrap: wrap; 
-  gap: 48px; 
-  /* Critical for RTL centering */
-  direction: ltr; 
+.trust-strip-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 60px);
+  position: relative;
+  z-index: 1;
 }
-.trust-item { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
+.trust-hd {
   text-align: center;
-  /* This prevents the box from growing/shrinking based on text length */
-  flex: 0 0 120px; 
-  gap: 12px; 
-  opacity: 0.45; 
-  direction: rtl; /* Switch back to RTL for the text inside */
+  margin-bottom: 56px;
 }
-.trust-item:hover { 
-  opacity: 0.75; 
+.trust-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+.trust-hd-bar {
+  width: 36px;
+  height: 3px;
+  background: var(--red);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+.trust-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  direction: ltr;
+}
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 36px 20px 32px;
+  background: linear-gradient(150deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.trust-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: linear-gradient(150deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.035) 100%);
+  border-color: rgba(200,57,26,0.28);
+  box-shadow: 0 20px 56px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,57,26,0.1), 0 0 28px rgba(200,57,26,0.06);
 }
 .trust-item-badge {
-  width: 72px;
-  height: 72px;
-  border: 1.5px solid rgba(255,255,255,0.2); 
-  border-radius: 12px;
-  display: flex; 
-  align-items: center; 
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.04);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; 
-  font-weight: 700; 
-  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
-
-/* Force Arabic font for the small labels below the badge */
-html[lang="ar"] .trust-item-label {
-  font-family: 'Tajawal', sans-serif;
-  font-size: 11px;
-  letter-spacing: 0;
+.trust-item:hover .trust-item-badge {
+  background: rgba(255,255,255,0.11);
+  border-color: rgba(255,255,255,0.16);
 }
-
-.trust-item-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-.trust-badge-ph { border-style: dashed !important; color: rgba(255,255,255,0.35) !important; }
+.trust-item-badge img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  display: block;
+}
+.trust-item-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.55;
+  text-transform: none;
+}
+.trust-badge-ph { border-style: dashed !important; color: rgba(255,255,255,0.25) !important; background: transparent !important; }
 .trust-badge-ph svg { display: block; }
-.trust-item-ph { opacity: 0.28; cursor: default; pointer-events: none; }
+.trust-item-ph { opacity: 0.18; cursor: default; pointer-events: none; }
+@media (max-width: 640px) {
+  .trust-strip { padding: 72px 0 80px; }
+  .trust-logos { grid-template-columns: 1fr; max-width: 300px; margin-inline: auto; }
+  .trust-hd { margin-bottom: 40px; }
+}
+@media (min-width: 641px) and (max-width: 860px) {
+  .trust-strip { padding: 80px 0 88px; }
+  .trust-logos { grid-template-columns: repeat(2, 1fr); max-width: 560px; margin-inline: auto; }
+}
 
 .jobs-wrap { max-width: 1280px; margin: 0 auto; padding: 56px 60px 96px; }
 .jobs-header {
@@ -1984,8 +2030,8 @@ html[lang="ar"] .svc-badge            { font-family: 'Tajawal', sans-serif; lett
 html[lang="ar"] .field label,
 html[lang="ar"] .mfield label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
 html[lang="ar"] .con-form-heading     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .trust-label,
-html[lang="ar"] .trust-item-label     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
+html[lang="ar"] .trust-label          { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: clamp(22px, 3vw, 30px); }
+html[lang="ar"] .trust-item-label     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 14px; }
 html[lang="ar"] .jobs-count,
 html[lang="ar"] .jobs-table-head,
 html[lang="ar"] .job-dept             { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
