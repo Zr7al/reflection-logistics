@@ -93,9 +93,17 @@ body {
 }
 
 /* ============================================================
-   IMAGE FADE-IN (lazy-loaded images)
+   IMAGE FADE-IN (scoped to content images only)
+   Global img opacity:0 removed — it had specificity 0,2,1 which
+   defeated any per-section overrides and hid logos/badges silently.
+   Only large content images in cards/sections get the fade.
    ============================================================ */
-img:not(.hero-img-tag):not(.img-eager) {
+.about-imgs img,
+.scard-img,
+.svc-card-img,
+.svc-slide img,
+.customs-img,
+.proj-card-img-wrap img {
   opacity: 0;
   transition: opacity 0.35s ease;
 }
@@ -1265,6 +1273,9 @@ margin-bottom:6px;
   padding: 100px 0;
   background: #121212;
 }
+.trust-section * {
+  box-sizing: border-box;
+}
 .trust-section .container {
   max-width: 900px;
   margin: 0 auto;
@@ -1303,22 +1314,13 @@ margin-bottom:6px;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  transition: transform 0.2s ease;
-  cursor: default;
 }
-.trust-item:hover { transform: scale(1.05); }
-.trust-logo-wrap {
-  width: 110px;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.trust-logo-wrap img {
+.trust-item img {
   width: 70px;
   height: 70px;
   object-fit: contain;
   display: block;
+  flex-shrink: 0;
 }
 .trust-item span {
   font-size: 13px;
@@ -1327,6 +1329,7 @@ margin-bottom:6px;
   text-align: center;
   max-width: 130px;
   line-height: 1.4;
+  display: block;
 }
 .trust-cta {
   margin-top: 40px;
@@ -1350,15 +1353,13 @@ margin-bottom:6px;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 3px;
-  border: none;
   transition: opacity 0.2s ease;
 }
 .trust-cta .btn-primary:hover { opacity: 0.85; }
 @media (max-width: 600px) {
   .trust-section { padding: 72px 0; }
-  .trust-logos { flex-direction: column; gap: 32px; }
-  .trust-logo-wrap { width: 90px; height: 90px; }
-  .trust-logo-wrap img { width: 56px; height: 56px; }
+  .trust-logos { flex-direction: column; align-items: center; gap: 32px; }
+  .trust-item img { width: 60px; height: 60px; }
   .trust-item span { max-width: 160px; }
 }
 @media (min-width: 601px) and (max-width: 900px) {
@@ -2023,10 +2024,10 @@ html[lang="ar"] .svc-badge            { font-family: 'Tajawal', sans-serif; lett
 html[lang="ar"] .field label,
 html[lang="ar"] .mfield label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
 html[lang="ar"] .con-form-heading     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .trust-header h2      { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 30px; font-weight: 800; }
-html[lang="ar"] .trust-header p       { font-family: 'Tajawal', sans-serif; }
-html[lang="ar"] .trust-item span      { font-family: 'Tajawal', sans-serif; letter-spacing: 0; font-size: 14px; }
-html[lang="ar"] .trust-cta p          { font-family: 'Tajawal', sans-serif; }
+html[lang="ar"] .trust-header h2        { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 30px; font-weight: 800; }
+html[lang="ar"] .trust-header p         { font-family: 'Tajawal', sans-serif; }
+html[lang="ar"] .trust-item span        { font-family: 'Tajawal', sans-serif; letter-spacing: 0; font-size: 14px; max-width: 150px; }
+html[lang="ar"] .trust-cta p            { font-family: 'Tajawal', sans-serif; }
 html[lang="ar"] .trust-cta .btn-primary { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 15px; }
 html[lang="ar"] .jobs-count,
 html[lang="ar"] .jobs-table-head,
@@ -2220,13 +2221,4 @@ html[lang="ar"] input,
 html[lang="ar"] textarea,
 html[lang="ar"] select {
   text-align: right;
-}
-
-/* ── Trust section: bypass lazy-fade and enforce fixed logo size ── */
-.trust-section img {
-  width: 70px !important;
-  height: 70px !important;
-  object-fit: contain !important;
-  opacity: 1 !important;
-  transform: none !important;
 }
