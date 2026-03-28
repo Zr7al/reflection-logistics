@@ -2221,3 +2221,12 @@ html[lang="ar"] textarea,
 html[lang="ar"] select {
   text-align: right;
 }
+
+/* ── Trust section: bypass lazy-fade and enforce fixed logo size ── */
+.trust-section img {
+  width: 70px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
