@@ -1259,199 +1259,124 @@ margin-bottom:6px;
 .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
 /* ============================================================
-   TRUST / CERTIFICATIONS STRIP
+   TRUST & PARTNERSHIPS
    ============================================================ */
-/* ── TRUST / CERTIFICATIONS STRIP ── */
-@keyframes trustFadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.trust-strip {
-  padding: 100px 0 108px;
-  background: #0b0b0c;
+.trust-section {
+  padding: 80px 0 88px;
+  background: #111113;
   position: relative;
   overflow: hidden;
-  isolation: isolate;
 }
-/* Top fade from previous section */
-.trust-strip::before {
+.trust-section::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(200,57,26,0.35) 40%, rgba(200,57,26,0.35) 60%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(200,57,26,0.3) 40%, rgba(200,57,26,0.3) 60%, transparent 100%);
   pointer-events: none;
 }
-/* Ambient light bloom */
-.trust-strip::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% -8%, rgba(200,57,26,0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 15% 80%, rgba(200,57,26,0.04) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 30% at 85% 80%, rgba(200,57,26,0.04) 0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
-.trust-strip-inner {
-  max-width: 1000px;
+.trust-inner {
+  max-width: 960px;
   margin: 0 auto;
   padding-inline: clamp(20px, 5vw, 60px);
-  position: relative;
-  z-index: 1;
-}
-/* ── Header ── */
-.trust-hd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
   text-align: center;
-  margin-bottom: 60px;
 }
-.trust-label {
-  display: block;
+.trust-text { display: flex; flex-direction: column; align-items: center; }
+.trust-eyebrow {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(26px, 3.2vw, 36px);
+  font-size: clamp(28px, 3.5vw, 36px);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
   line-height: 1.1;
-  margin-bottom: 16px;
+  margin: 0 0 10px;
 }
-.trust-hd-bar {
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--red) 40%, var(--red) 60%, transparent);
-  border-radius: 2px;
-  margin: 0 auto;
-  box-shadow: 0 0 14px rgba(200,57,26,0.55), 0 0 28px rgba(200,57,26,0.22);
+.trust-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 480px;
 }
-/* ── Grid ── */
 .trust-logos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  direction: ltr;
-}
-/* ── Card ── */
-.trust-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-  gap: 0;
-  padding: 44px 28px 36px;
-  background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.018) 100%);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.32s cubic-bezier(0.22,1,0.36,1),
-              box-shadow 0.32s cubic-bezier(0.22,1,0.36,1),
-              border-color 0.32s ease;
-  opacity: 0;
-  animation: trustFadeUp 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-/* Card inner top-edge light streak */
-.trust-item::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 15%; right: 15%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-  pointer-events: none;
-}
-/* Card hover spotlight */
-.trust-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle 160px at 50% 30%, rgba(200,57,26,0.07) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.32s ease;
-  pointer-events: none;
-  border-radius: 24px;
-}
-.trust-item:hover::after { opacity: 1; }
-.trust-item:nth-child(1) { animation-delay: 0.08s; }
-.trust-item:nth-child(2) { animation-delay: 0.20s; }
-.trust-item:nth-child(3) { animation-delay: 0.32s; }
-.trust-item:hover {
-  transform: translateY(-6px) scale(1.025);
-  border-color: rgba(200,57,26,0.3);
-  box-shadow:
-    0 2px 0 rgba(255,255,255,0.06) inset,
-    0 24px 64px rgba(0,0,0,0.55),
-    0 8px 24px rgba(0,0,0,0.3),
-    0 0 0 1px rgba(200,57,26,0.12),
-    0 0 40px rgba(200,57,26,0.07);
-}
-/* ── Logo — free, no container ── */
-.trust-item-badge {
-  width: auto;
-  height: auto;
-  background: none;
-  border: none;
-  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
-  transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), filter 0.32s ease;
-  position: relative;
+  gap: clamp(32px, 6vw, 72px);
+  flex-wrap: wrap;
+  direction: ltr;
 }
-/* Soft glow behind logo */
-.trust-item-badge::before {
-  content: '';
-  position: absolute;
-  inset: -16px;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: opacity 0.32s ease;
-  opacity: 0.6;
+.trust-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
 }
-.trust-item:hover .trust-item-badge::before { opacity: 1; }
-.trust-item:hover .trust-item-badge {
-  transform: scale(1.06) translateY(-3px);
-  filter: brightness(1.08) drop-shadow(0 4px 16px rgba(255,255,255,0.12));
-}
-.trust-item-badge img {
+.trust-logo-item:hover { opacity: 1; transform: scale(1.05); }
+.trust-logo-item img {
   width: auto;
-  max-width: 160px;
-  height: 100px;
+  max-width: 150px;
+  height: 90px;
   object-fit: contain;
   display: block;
-  filter: brightness(1) saturate(0.9);
-  transition: filter 0.32s ease;
+  filter: grayscale(0.4) brightness(0.9);
+  transition: filter 0.3s ease;
 }
-.trust-item:hover .trust-item-badge img {
-  filter: brightness(1.1) saturate(1);
-}
-/* ── Label ── */
-.trust-item-label {
-  font-size: 15px;
+.trust-logo-item:hover img { filter: grayscale(0) brightness(1.05); }
+.trust-logo-label {
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.015em;
-  color: #ffffff;
-  line-height: 1.5;
-  text-transform: none;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 140px;
+  line-height: 1.4;
 }
-/* ── Placeholder fallback ── */
-.trust-badge-ph { border: 1.5px dashed rgba(255,255,255,0.2) !important; width: 100px; height: 100px; border-radius: 12px; }
-.trust-badge-ph svg { display: block; color: rgba(255,255,255,0.25); }
-.trust-item-ph { opacity: 0.15; cursor: default; pointer-events: none; animation: none; }
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .trust-strip { padding: 72px 0 80px; }
-  .trust-logos { grid-template-columns: 1fr; max-width: 320px; margin-inline: auto; gap: 16px; }
-  .trust-hd { margin-bottom: 44px; }
-  .trust-item-badge img { max-width: 130px; height: 80px; }
+.trust-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
 }
-@media (min-width: 641px) and (max-width: 900px) {
-  .trust-strip { padding: 80px 0 90px; }
-  .trust-logos { grid-template-columns: repeat(2, 1fr); max-width: 580px; margin-inline: auto; }
-  .trust-item:last-child { grid-column: 1 / -1; max-width: 280px; justify-self: center; }
+.trust-cta-p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+}
+.trust-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 26px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+.trust-cta-btn:hover {
+  border-color: var(--red);
+  color: #fff;
+  background: rgba(200,57,26,0.08);
+}
+@media (max-width: 600px) {
+  .trust-section { padding: 60px 0 68px; }
+  .trust-inner { gap: 36px; }
+  .trust-logos { gap: 28px; }
+  .trust-logo-item img { max-width: 110px; height: 70px; }
+  .trust-logo-label { font-size: 12px; max-width: 120px; }
 }
 
 .jobs-wrap { max-width: 1280px; margin: 0 auto; padding: 56px 60px 96px; }
@@ -2112,8 +2037,11 @@ html[lang="ar"] .svc-badge            { font-family: 'Tajawal', sans-serif; lett
 html[lang="ar"] .field label,
 html[lang="ar"] .mfield label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
 html[lang="ar"] .con-form-heading     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .trust-label          { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: clamp(24px, 3.2vw, 32px); font-weight: 800; }
-html[lang="ar"] .trust-item-label     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 15px; }
+html[lang="ar"] .trust-eyebrow        { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: clamp(26px, 3.2vw, 34px); font-weight: 800; }
+html[lang="ar"] .trust-sub            { font-family: 'Tajawal', sans-serif; }
+html[lang="ar"] .trust-logo-label     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; font-size: 14px; }
+html[lang="ar"] .trust-cta-p          { font-family: 'Tajawal', sans-serif; }
+html[lang="ar"] .trust-cta-btn        { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 15px; }
 html[lang="ar"] .jobs-count,
 html[lang="ar"] .jobs-table-head,
 html[lang="ar"] .job-dept             { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
