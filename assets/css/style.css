@@ -1267,47 +1267,44 @@ margin-bottom:6px;
 .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
 /* ============================================================
-   TRUST STRIP (above footer, all pages)
+   FOOTER TRUST ROW
    ============================================================ */
-.trust-strip {
-  padding: 40px 0;
-  background: #111;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.trust-strip .container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 clamp(20px, 5vw, 48px);
-  box-sizing: border-box;
-}
-.trust-strip-text {
+.footer-trust {
   text-align: center;
-  font-size: 14px;
-  color: rgba(255,255,255,0.7);
-  margin: 0 0 20px;
-  line-height: 1.5;
+  padding: 36px clamp(20px, 5vw, 80px) 28px;
+  border-bottom: 1px solid #e8e3de;
 }
-.trust-strip-logos {
+.footer-trust p {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #9e9894;
+  margin-bottom: 22px;
+}
+.footer-trust-logos {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
   flex-wrap: wrap;
 }
-.trust-strip-logos img {
-  height: 40px;
+.footer-trust-logos img {
+  height: 50px;
+  max-height: 50px;
   width: auto;
+  max-width: 200px;
   object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.9;
   transition: opacity 0.2s ease;
   display: block;
+  flex-shrink: 0;
 }
-.trust-strip-logos img:hover { opacity: 1; }
+.footer-trust-logos img:hover { opacity: 1; }
 @media (max-width: 480px) {
-  .trust-strip { padding: 32px 0; }
-  .trust-strip-logos { gap: 24px; }
-  .trust-strip-logos img { height: 32px; }
+  .footer-trust { padding: 28px 20px 22px; }
+  .footer-trust-logos { gap: 24px; }
+  .footer-trust-logos img { height: 40px; }
 }
 
 .jobs-wrap { max-width: 1280px; margin: 0 auto; padding: 56px 60px 96px; }
@@ -1968,7 +1965,7 @@ html[lang="ar"] .svc-badge            { font-family: 'Tajawal', sans-serif; lett
 html[lang="ar"] .field label,
 html[lang="ar"] .mfield label         { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
 html[lang="ar"] .con-form-heading     { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; font-size: 12px; }
-html[lang="ar"] .trust-strip-text { font-family: 'Tajawal', sans-serif; letter-spacing: 0; }
+html[lang="ar"] .footer-trust p { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }
 html[lang="ar"] .jobs-count,
 html[lang="ar"] .jobs-table-head,
 html[lang="ar"] .job-dept             { font-family: 'Tajawal', sans-serif; letter-spacing: 0; text-transform: none; }

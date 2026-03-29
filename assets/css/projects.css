@@ -273,8 +273,16 @@ html[lang="ar"] .proj-cta-strip-btn { font-family: 'Tajawal', sans-serif; letter
    ═══════════════════════════════════════════════════════════ */
 
 .pd-breadcrumb {
+  position: static;
+  height: auto;
+  display: block;
+  padding-inline: 0;
   background: var(--black);
   border-bottom: 1px solid var(--border);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: none;
   padding-top: 76px;
 }
 .pd-breadcrumb-inner {
