@@ -246,6 +246,17 @@ CAREERS EMPTY STATE
 
 const initCareers = () => {
   const jobs = document.getElementById('jobsList')
+  if (jobs) {
+    const items = [...jobs.querySelectorAll('.job-item')]
+    if (items.length > 1) {
+      items.sort((a, b) => {
+        const da = a.dataset.posted || '1970-01-01'
+        const db = b.dataset.posted || '1970-01-01'
+        return db.localeCompare(da)
+      })
+      items.forEach(el => jobs.appendChild(el))
+    }
+  }
   if (jobs && !jobs.querySelector('.job-item')) {
     jobs.innerHTML = `
       <div class="no-jobs reveal visible">
