@@ -124,7 +124,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
     <li><a href="services.html" data-i18n="nav_services">Services</a></li>
-    <li><a href="projects.html" data-i18n="nav_projects">Projects</a></li>
+    <!-- Temporarily hidden: <li><a href="projects.html" data-i18n="nav_projects">Projects</a></li> -->
     <li><a href="careers.html" data-i18n="nav_careers">Careers</a></li>
     <li><a href="contact.html" data-i18n="nav_contact">Contact Us</a></li>
   </ul>
@@ -223,7 +223,7 @@
         </div>
         <div class="svc-card-body">
           <h3 data-i18n="svcp_air_h">Air Freight</h3>
-          <p class="svc-desc" data-i18n="svcp_air_p">Time-critical shipments handled with speed and security. Direct access to major international airports including Queen Alia with full customs support, door-to-door delivery.</p>
+          <p class="svc-desc" data-i18n="svcp_air_p">We handle time-sensitive cargo with the speed and precision your business needs. With direct access to Queen Alia International Airport and a solid global airline network, we coordinate express and standard airfreight for any size — managing documentation, customs clearance, regulatory compliance, and door-to-door delivery on time.</p>
           <a href="contact.html" class="svc-cta" aria-label="Get a quote for Air Freight services">
             <span data-i18n="svcp_quote">Get a Quote</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -295,7 +295,7 @@
         </div>
         <div class="svc-card-body">
           <h3 data-i18n="svcp_sea_h">Sea Freight</h3>
-          <p class="svc-desc" data-i18n="svcp_sea_p">International container shipping via the Port of Aqaba and major global ports. FCL and LCL options with competitive transit times, full port operations management, and end-to-end cargo visibility from origin to destination.</p>
+          <p class="svc-desc" data-i18n="svcp_sea_p">Move large volumes cost-effectively with our complete sea freight solutions. Through the Port of Aqaba and major global ports worldwide, we handle Full Container Load (FCL) and Less-than-Container Load (LCL) shipments — managing documentation, port operations, customs clearance, and full cargo visibility from origin to destination.</p>
           <a href="contact.html" class="svc-cta" aria-label="Get a quote for Sea Freight services">
             <span data-i18n="svcp_quote">Get a Quote</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -367,7 +367,7 @@
         </div>    
         <div class="svc-card-body">
           <h3 data-i18n="svcp_land_h">Land Freight</h3>
-          <p class="svc-desc" data-i18n="svcp_land_p">Extensive road transport network covering Jordan and destinations worldwide. Our fleet handles full and partial truckloads with real-time updates and professional management.</p>
+          <p class="svc-desc" data-i18n="svcp_land_p">Our road freight network covers Jordan and extends across regional and international borders. Whether FTL or LTL, our professional fleet and experienced drivers guarantee reliable, on-time delivery with real-time tracking, dedicated account management, and scheduling flexibility.</p>
           <a href="contact.html" class="svc-cta" aria-label="Get a quote for Land Freight services">
             <span data-i18n="svcp_quote">Get a Quote</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -425,7 +425,7 @@
         </div>
         <div class="svc-card-body">
           <h3 data-i18n="svcp_customs_h">Customs Clearance</h3>
-          <p class="svc-desc" data-i18n="svcp_customs_p">Full customs brokerage and documentation handling at all Jordanian ports of entry. We manage tariff classification, duty assessment, and regulatory compliance so your cargo clears without delays or penalties.</p>
+          <p class="svc-desc" data-i18n="svcp_customs_p">Customs regulations are complex; we make them straightforward. Our licensed brokers handle the full clearance process at all Jordanian entry points: Queen Alia Airport, the Port of Aqaba, and all land/sea border crossings. We manage tariff classification, duty assessment, import and export permits, and all compliance documentation.</p>
           <a href="contact.html" class="svc-cta" aria-label="Get a quote for Customs Clearance services">
             <span data-i18n="svcp_quote">Get a Quote</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -435,55 +435,106 @@
 
     </div>
 
-    <div class="svc-section-label soon">
-      <div class="dot"></div>
-      <span data-i18n="svcp_soon">Coming Soon</span>
-    </div>
-
     <div class="svc-grid">
-      <div class="svc-card coming-soon">
-        <div class="svc-card-img-wrap">
-          <span class="svc-badge coming"><span class="bdot"></span> <span data-i18n="svcp_soon">Coming Soon</span></span>
-          <picture>
-            <source
-              type="image/webp"
-              srcset="
-                assets/images/warehousing-400.webp 400w,
-                assets/images/warehousing-800.webp 800w,
-                assets/images/warehousing-1200.webp 1200w
-              "
-              sizes="(min-width: 1024px) 50vw, 100vw">
-            <img class="svc-card-img" src="assets/images/warehousing-800.webp" alt="Managed warehousing and inventory facility in Amman, Jordan" loading="lazy" width="600" height="400" decoding="async" onerror="this.style.background='#1a1918';this.style.minHeight='280px';this.style.display='block'">
-          </picture>
-          <div class="coming-overlay"><div class="coming-overlay-tag" data-i18n="svcp_soon">Coming Soon</div></div>
+      <div class="svc-card">
+        <div class="svc-card-img-link" aria-label="Warehousing services">
+          <div class="svc-card-img-wrap">
+            <span class="svc-badge"><span class="bdot"></span> Active</span>
+
+            <div class="svc-slider" data-slider>
+              <div class="svc-slides">
+                <div class="svc-slide" data-slide-index="0">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="
+                        assets/images/warehousing-400.webp 400w,
+                        assets/images/warehousing-800.webp 800w,
+                        assets/images/warehousing-1200.webp 1200w
+                      "
+                      sizes="(min-width: 1024px) 50vw, 100vw">
+                    <img class="svc-card-img" src="assets/images/warehousing-800.webp" alt="Managed warehousing and inventory facility in Amman, Jordan" width="800" height="450" loading="lazy" decoding="async">
+                  </picture>
+                </div>
+                <div class="svc-slide" data-slide-index="1">
+                  <img class="svc-card-img" data-src="assets/images/warehousing2.jpg" alt="Warehousing storage racks and logistics operations" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+                </div>
+                <div class="svc-slide" data-slide-index="2">
+                  <img class="svc-card-img" data-src="assets/images/warehousing3.jpg" alt="Inventory management inside a modern warehouse facility" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+                </div>
+              </div>
+
+              <div class="slider-nav">
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
+              </div>
+
+              <div class="slider-dots">
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
+                <button class="dot" type="button" data-dot-index="2" aria-label="Slide 3"></button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="svc-card-body">
           <h3 data-i18n="svcp_wh_h">Warehousing</h3>
-          <p class="svc-desc" data-i18n="svcp_wh_p">Secure, managed storage facilities with inventory control, pick-and-pack operations, and seamless integration with your freight movements. Launching soon across strategic locations in Jordan.</p>
-          <button type="button" class="svc-cta disabled" disabled data-i18n="svcp_notyet">Not Available Yet</button>
+          <p class="svc-desc" data-i18n="svcp_wh_p">Our secure, managed warehouses provide full inventory control, pick-and-pack operations, and seamless integration with all your freight movements. With flexible storage options covering all cargo types and strategically located facilities across Jordan, your goods are always expertly handled, safely stored, and distributed on time.</p>
+          <a href="contact.html" class="svc-cta" aria-label="Get a quote for Warehousing services">
+            <span data-i18n="svcp_quote">Get a Quote</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
-      <div class="svc-card coming-soon">
-        <div class="svc-card-img-wrap">
-          <span class="svc-badge coming"><span class="bdot"></span> <span data-i18n="svcp_soon">Coming Soon</span></span>
-          <picture>
-            <source
-              type="image/webp"
-              srcset="
-                assets/images/project-400.webp 400w,
-                assets/images/project-800.webp 800w,
-                assets/images/project-1200.webp 1200w
-              "
-              sizes="(min-width: 1024px) 50vw, 100vw">
-            <img class="svc-card-img" src="assets/images/project-800.webp" alt="Heavy lift project cargo and oversized freight transport for industrial projects" loading="lazy" width="600" height="400" decoding="async" onerror="this.style.background='#1a1918';this.style.minHeight='280px';this.style.display='block'">
-          </picture>
-          <div class="coming-overlay"><div class="coming-overlay-tag" data-i18n="svcp_soon">Coming Soon</div></div>
+      <div class="svc-card">
+        <div class="svc-card-img-link" aria-label="Project Cargo services">
+          <div class="svc-card-img-wrap">
+            <span class="svc-badge"><span class="bdot"></span> Active</span>
+
+            <div class="svc-slider" data-slider>
+              <div class="svc-slides">
+                <div class="svc-slide" data-slide-index="0">
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="
+                        assets/images/project-400.webp 400w,
+                        assets/images/project-800.webp 800w,
+                        assets/images/project-1200.webp 1200w
+                      "
+                      sizes="(min-width: 1024px) 50vw, 100vw">
+                    <img class="svc-card-img" src="assets/images/project-800.webp" alt="Heavy lift project cargo and oversized freight transport for industrial projects" width="800" height="450" loading="lazy" decoding="async">
+                  </picture>
+                </div>
+                <div class="svc-slide" data-slide-index="1">
+                  <img class="svc-card-img" data-src="assets/images/project2.jpg" alt="Specialized equipment handling oversized cargo for infrastructure projects" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+                </div>
+                <div class="svc-slide" data-slide-index="2">
+                  <img class="svc-card-img" data-src="assets/images/project3.jpg" alt="Heavy transport vehicle for large-scale industrial project cargo" width="800" height="450" loading="lazy" decoding="async" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==">
+                </div>
+              </div>
+
+              <div class="slider-nav">
+                <button class="s-prev" type="button" aria-label="Previous image"></button>
+                <button class="s-next" type="button" aria-label="Next image"></button>
+              </div>
+
+              <div class="slider-dots">
+                <button class="dot active" type="button" data-dot-index="0" aria-label="Slide 1"></button>
+                <button class="dot" type="button" data-dot-index="1" aria-label="Slide 2"></button>
+                <button class="dot" type="button" data-dot-index="2" aria-label="Slide 3"></button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="svc-card-body">
           <h3 data-i18n="svcp_proj_h">Project Cargo</h3>
-          <p class="svc-desc" data-i18n="svcp_proj_p">Heavy lift, oversized, and out-of-gauge cargo solutions for large-scale industrial and infrastructure projects. Custom engineered transport plans, specialized equipment, and dedicated project management.</p>
-          <button type="button" class="svc-cta disabled" disabled data-i18n="svcp_notyet">Not Available Yet</button>
+          <p class="svc-desc" data-i18n="svcp_proj_p">We deliver heavy lift, oversized, and out-of-gauge cargo solutions for large-scale industrial and infrastructure projects across the globe. Our team engineers custom transport plans, deploys specialized handling equipment, and provides hands-on dedicated project management from the initial pickup all the way to final site delivery.</p>
+          <a href="contact.html" class="svc-cta" aria-label="Get a quote for Project Cargo services">
+            <span data-i18n="svcp_quote">Get a Quote</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -544,6 +595,7 @@
       <img src="assets/images/cert-jla.png" alt="Jordan Logistics Association" loading="eager">
       <img src="assets/images/cert-ltrc.png" alt="Land Transport Regulatory Commission" loading="eager">
       <img src="assets/images/cert-jma.png" alt="Jordan Maritime Authority" loading="eager">
+      <img src="assets/images/cert-acc.png" alt="Amman Chamber of Commerce" loading="eager">
     </div>
   </div>
   <div class="footer-top">
@@ -603,6 +655,6 @@
 
 <script src="assets/js/components.js?v=1" defer></script>
 <script src="assets/js/I18n.min.js?v=2" defer></script>
-<script src="assets/js/main.min.js?v=2" defer></script>
+<script src="assets/js/main.min.js?v=3" defer></script>
 </body>
 </html>
