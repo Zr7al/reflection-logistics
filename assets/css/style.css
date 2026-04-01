@@ -444,7 +444,7 @@ nav.nav-scrolled {
   opacity: 0; animation: fade-up 0.7s 0.1s ease forwards;
 }
 .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--red); flex-shrink: 0; }
-.hero-eyebrow span { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
+.hero-eyebrow span { font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); }
 .hero h1 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(64px, 9vw, 112px);
@@ -905,10 +905,6 @@ footer {
   font-size: 14px;
   line-height: 1.6;
   flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .svc-desc {
@@ -1286,25 +1282,25 @@ margin-bottom:6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 .footer-trust-logos img {
-  height: 50px;
-  max-height: 50px;
+  height: 68px;
   width: auto;
-  max-width: 200px;
+  max-width: 180px;
   object-fit: contain;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
+  object-position: center;
   display: block;
   flex-shrink: 0;
 }
-.footer-trust-logos img:hover { opacity: 1; }
+.footer-trust-logos img[src*="cert-acc"] {
+  transform: translateX(-20px);
+}
 @media (max-width: 480px) {
   .footer-trust { padding: 28px 20px 22px; }
-  .footer-trust-logos { gap: 24px; }
-  .footer-trust-logos img { height: 40px; }
+  .footer-trust-logos { gap: 20px; }
+  .footer-trust-logos img { height: 50px; }
 }
 
 .jobs-wrap { max-width: 1280px; margin: 0 auto; padding: 56px 60px 96px; }
